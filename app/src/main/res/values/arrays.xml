@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_preference_tts_entries">
+        <item>小燕 （女声，普通话）</item>
+        <item>小余 （男声，普通话）</item>
+        <item>小朱 （女声，普通话）</item>
+        <item>小李 （男声，普通话）</item>
+        <item>小苟 （男声，普通话）</item>
+        <item>小美 （女声，粤  语）</item>
+        <item>小莉 （女声，台湾普通话）</item>
+    </string-array>
+    <string-array name="list_preference_tts_values">
+        <item>xiaoyan</item>
+        <item>xiaoyu</item>
+        <item>xiaozhu</item>
+        <item>xiaoli</item>
+        <item>xiaogou</item>
+        <item>xiaomei</item>
+        <item>xiaoli</item>
+    </string-array>
+    <string-array name="list_preference_refresh_entries">
+        <item>5 秒</item>
+        <item>10 秒</item>
+        <item>30 秒</item>
+    </string-array>
+    <string-array name="list_preference_refresh_values">
+        <item>5</item>
+        <item>10</item>
+        <item>30</item>
+    </string-array>
+    <string-array name="list_preference_colors_entries">
+
+    </string-array>
+
+    <string-array name="colors_name">
+        <item>天空蓝</item>
+        <item>绿篱色</item>
+        <item>尼亚加拉</item>
+        <item>可爱粉</item>
+        <item>赭石色</item>
+        <item>烈焰红</item>
+        <item>青蓝</item>
+
+    </string-array>
+</resources>

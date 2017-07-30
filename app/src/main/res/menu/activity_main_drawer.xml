@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_weather"
+            android:icon="@drawable/weather"
+            android:title="天气" />
+        <item
+            android:id="@+id/nav_bus"
+            android:icon="@drawable/wx_mm"
+            android:title="微信mm" />
+        <item
+            android:id="@+id/nav_read"
+            android:icon="@drawable/movie"
+            android:title="开眼" />
+        <item
+            android:id="@+id/nav_welfare"
+            android:icon="@drawable/fuli"
+            android:title="福利" />
+    </group>
+
+    <item android:title="@string/menu_tile_devider">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/settings"
+                android:title="设置" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/about"
+                android:title="关于" />
+        </menu>
+
+    </item>
+
+</menu>
