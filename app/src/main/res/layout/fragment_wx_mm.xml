@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="虎嗅"
+            app:titleTextColor="@android:color/white" />
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:visibility="gone">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/banner_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"></android.support.v4.view.ViewPager>
+
+        <com.example.circleindicator.CircleIndicator
+            android:id="@+id/circleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/dp_10"
+            app:enableClickSwitch="true"
+            app:indicatorBorderWidth="8dp"
+            app:indicatorDotCount="3"
+            app:indicatorDotNormalColor="?attr/colorPrimary"
+            app:indicatorRadius="4dp"
+            app:indicatorSelectColor="@android:color/white"
+            app:indicatorSpace="5dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/anchor"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <com.example.yungui.weather.widgets.mWebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+        </com.example.yungui.weather.widgets.mWebView>
+
+        <WebView
+            android:layout_below="@+id/webView"
+            android:id="@+id/preWebView"
+            android:layout_width="match_parent"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_height="1dp"
+            android:scrollbars="vertical">
+        </WebView>
+    </RelativeLayout>
+
+
+</LinearLayout>
+

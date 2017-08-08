@@ -8,6 +8,7 @@ import android.support.annotation.MenuRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,7 @@ public abstract class BaseFragment extends Fragment {
 
     //根布局
     protected View rootView;
+    protected Context mContext;
 
     //获取布局ID
     protected abstract
@@ -53,6 +55,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mContext = context;
     }
 
     @Override
@@ -89,8 +92,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.e(TAG, "onCreateOptionsMenu: 被调用了" );
-        inflater.inflate(getMenuID(),menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -99,6 +100,7 @@ public abstract class BaseFragment extends Fragment {
         onMenuItemClick(item.getItemId());
         return super.onOptionsItemSelected(item);
     }
+
 
     /**
      *  可见时判断 加载数据

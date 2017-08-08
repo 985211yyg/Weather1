@@ -59,15 +59,15 @@
         <activity
             android:name=".ui.video.VideoDetailActivity"
             android:label=""
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.video.VideoSearchDetailActivity"
             android:label=""
-            android:theme="@style/SearchTheme">
-        </activity>
+            android:theme="@style/SearchTheme"></activity>
         <activity
             android:name=".ui.welfare.PicAlbumActivity"
             android:label="@string/album_activity" />
+        <activity android:name=".ui.wxmm.WXmmPicActivity"></activity>
     </application>
 
 </manifest>

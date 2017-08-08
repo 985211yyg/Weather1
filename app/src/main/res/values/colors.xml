@@ -9,6 +9,7 @@
     <color name="purple">#860570</color>
     <color name="green">#04ab28</color>
     <color name="niagara">#4C829E</color>
+    <color name="loading_bg_v_color">#ffffff</color>
 
     <array name="theme_colors">
         <item>@color/colorPrimary</item>

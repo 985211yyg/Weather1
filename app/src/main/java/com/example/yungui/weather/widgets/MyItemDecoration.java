@@ -52,9 +52,9 @@ public class MyItemDecoration extends RecyclerView.ItemDecoration {
 
             int itemIndex = parent.getChildAdapterPosition(child);
             //第一个itemview不用绘制
-            if (itemIndex == 0) {
-                continue;
-            }
+//            if (itemIndex == 0) {
+//                continue;
+//            }
             //获取itemView的布局参数
             RecyclerView.LayoutParams childLayoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
 

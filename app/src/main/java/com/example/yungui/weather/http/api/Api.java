@@ -18,4 +18,7 @@ public class Api {
     //发现更多下一页
     public static final String nextPageUrl = "http://baobab.kaiyanapp.com/api/v3/videos?start=10&num=10&categoryName=%E5%B9%BF%E5%91%8A&strategy=date";
 
+
+    //妹子图微星公众号
+    public static final String WX_MM = "http://mp.weixin.qq.com/mp/homepage?__biz=MzA3MjQyNjkwMw==&hid=1&sn=fea772ab11ce84eaa2f0409ba0a9e73b#wechat_redirect";
 }

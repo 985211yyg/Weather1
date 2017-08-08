@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/copy_url"
+        android:title="@string/copy"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/share"
+        android:title="@string/share"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/download"
+        android:title="@string/asve"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/attribute"
+        android:title="@string/attribute"
+        app:showAsAction="always">
+    </item>
+
+</menu>

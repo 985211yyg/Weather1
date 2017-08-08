@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center">
+        <layer-list>
+            <item
+                android:width="15dp"
+                android:height="50dp"
+                android:bottom="0dp"
+                android:gravity="bottom"
+                android:start="50dp">
+                <color android:color="@color/loading_bg_v_color"></color>
+
+            </item>
+            <item
+                android:width="15dp"
+                android:height="70dp"
+                android:bottom="0dp"
+                android:gravity="bottom"
+                android:start="25dp">
+                <color android:color="@color/loading_bg_v_color"></color>
+            </item>
+            <item
+                android:width="15dp"
+                android:height="30dp"
+                android:bottom="0dp"
+                android:gravity="bottom"
+                android:start="0dp">
+                <color android:color="@color/loading_bg_v_color"></color>
+            </item>
+        </layer-list>
+    </item>
+
+</layer-list>

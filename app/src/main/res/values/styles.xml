@@ -94,4 +94,9 @@
     <style name="MySearchActivityAnim" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/enter_from_bottom</item>
     </style>
+
+    <style name="popupWindow_toast_anim">
+        <!--<item name="android:windowExitAnimation">@anim/out_to_bottom</item>-->
+        <item name="android:windowEnterAnimation">@anim/enter_from_bottom</item>
+    </style>
 </resources>

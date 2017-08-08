@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:transitionName="share||||View"
         android:src="@mipmap/meinv">
-
     </com.example.yungui.weather.widgets.DragPhotoView>
 
 </RelativeLayout>

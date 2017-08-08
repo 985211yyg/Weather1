@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="transparent">
+    <item
+        android:gravity="center_vertical">
+        <layer-list>
+            <item
+                android:height="15dp"
+                android:gravity="start"
+                android:top="0dp"
+                android:right="20dp"
+                android:start="10dp">
+                <color android:color="@color/loading_bg_v_color"></color>
+            </item>
+
+            <item
+                android:height="15dp"
+                android:gravity="start"
+                android:right="60dp"
+                android:top="30dp"
+                android:start="10dp">
+                <color android:color="@color/loading_bg_v_color" ></color>
+
+            </item>
+        </layer-list>
+    </item>
+
+
+</layer-list>

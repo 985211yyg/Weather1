@@ -14,7 +14,7 @@ import com.example.yungui.weather.AppGlobal;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.event.ThemeChangeEvent;
 import com.example.yungui.weather.ui.base.BaseActivity;
-import com.example.yungui.weather.ui.wxmm.BusFragment;
+import com.example.yungui.weather.ui.wxmm.WXmmFragment;
 import com.example.yungui.weather.ui.video.VideoFragment;
 import com.example.yungui.weather.ui.setting.SettingActivity;
 import com.example.yungui.weather.ui.weather.WeatherFragment;
@@ -171,7 +171,7 @@ public class MainActivity extends BaseActivity
         if (FoundFragment == null) {
             switch (fragmentName) {
                 case FRAGMENT_TAG_BUS:
-                    FoundFragment = new BusFragment();
+                    FoundFragment = new WXmmFragment();
                     break;
                 case FRAGMENT_TAG_WEATHER:
                     FoundFragment = new WeatherFragment();

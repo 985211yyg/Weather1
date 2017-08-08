@@ -45,7 +45,7 @@ public class DragPhotoView extends PhotoView {
     public static final float DEFAULT_MIN_SCALE = 1.0f;
 
     //透明度
-    private int mAlpha = 255;
+    private int mAlpha;
     //最大的竖直方向的移动距离
     private final static int MAX_TRANSLATE_Y = 400;
 
@@ -189,7 +189,6 @@ public class DragPhotoView extends PhotoView {
         } else if (mAlpha < 0) {
             mAlpha = 0;
         }
-
         //通知重绘
         invalidate();
     }
