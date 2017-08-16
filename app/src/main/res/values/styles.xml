@@ -80,12 +80,17 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <!--<item name="android:windowAnimationStyle">@style/myDialogFragmentAnim</item>-->
     </style>
 
     <style name="myDialogFragmentAnim" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/enter_from_bottom</item>
         <item name="android:windowExitAnimation">@anim/out_to_left</item>
+    </style>
+
+    <style name="myPicActivityAnim" parent="@android:style/Animation.Activity">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="SearchTheme" parent="Theme.AppCompat.Light.NoActionBar">

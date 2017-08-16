@@ -63,11 +63,13 @@
         <activity
             android:name=".ui.video.VideoSearchDetailActivity"
             android:label=""
-            android:theme="@style/SearchTheme"></activity>
+            android:theme="@style/SearchTheme" />
         <activity
             android:name=".ui.welfare.PicAlbumActivity"
             android:label="@string/album_activity" />
-        <activity android:name=".ui.wxmm.WXmmPicActivity"></activity>
+        <activity
+            android:name=".ui.wxmm.WXmmPicActivity"
+            android:theme="@style/myPicActivityAnim" />
     </application>
 
 </manifest>

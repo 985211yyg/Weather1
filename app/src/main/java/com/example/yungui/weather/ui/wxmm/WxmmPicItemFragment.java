@@ -1,7 +1,13 @@
 package com.example.yungui.weather.ui.wxmm;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -12,18 +18,18 @@ import com.example.yungui.weather.ui.base.BaseFragment;
 import com.example.yungui.weather.widgets.DragPhotoView;
 import com.example.yungui.weather.widgets.RatioImageView;
 
-public class WxmmPicItemFragment extends BaseFragment implements DragPhotoView.OnExitListener{
+public class WxmmPicItemFragment extends BaseFragment implements DragPhotoView.OnExitListener {
     private DragPhotoView dragPhotoView;
     private ProgressBar progressBar;
+
     private String url;
-    private int position;
-    private int totalCount;
+
+    private FrameLayout frameLayout;
+    private Window window;
 
     public static WxmmPicItemFragment Instance(String url, int position, int totalCount) {
         Bundle data = new Bundle();
-        data.putInt("total",totalCount);
-        data.putInt("position", position);
-        data.putString("url",url);
+        data.putString("url", url);
         WxmmPicItemFragment itemFragment = new WxmmPicItemFragment();
         itemFragment.setArguments(data);
         return itemFragment;
@@ -47,12 +53,13 @@ public class WxmmPicItemFragment extends BaseFragment implements DragPhotoView.O
 
     @Override
     protected void initView() {
+        frameLayout = findView(R.id.img_background);
         url = getArguments().getString("url");
-        position = getArguments().getInt("position");
-        totalCount = getArguments().getInt("total");
         dragPhotoView = findView(R.id.img);
         progressBar = findView(R.id.progressBar);
         dragPhotoView.setExitListener(this);
+//        count.setText(position+"/"+totalCount);
+
     }
 
     @Override
@@ -73,6 +80,27 @@ public class WxmmPicItemFragment extends BaseFragment implements DragPhotoView.O
 
     @Override
     public void onExit(DragPhotoView dragPhotoView, float translateX, float translateY, float W, float Y) {
+
+//        float alpha = 255 - Math.abs(translateY) / 2;
+//        if (alpha < 0) {
+//            alpha = 0;
+//        } else if (alpha > 255) {
+//            alpha = 255;
+//        }
+//        //0-255
+//        window = getActivity().getWindow();
+//        WindowManager.LayoutParams layoutParams = window.getAttributes();
+//        layoutParams.alpha = alpha;
+//        window.setAttributes(layoutParams);
+        if (translateY> 500) {
+            getActivity().finish();
+            getActivity().overridePendingTransition(0,R.transition.explode);
+        }
+        if (translateY < -500) {
+            getActivity().finish();
+            getActivity().overridePendingTransition(0,R.transition.explode);
+        }
+
 
     }
 }

@@ -5,9 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_weather"
-            android:icon="@drawable/weather"
-            android:title="天气" />
+            android:id="@+id/nav_nh"
+            android:icon="@drawable/ic_drawer_nh"
+            android:title="内涵" />
         <item
             android:id="@+id/nav_bus"
             android:icon="@drawable/wx_mm"

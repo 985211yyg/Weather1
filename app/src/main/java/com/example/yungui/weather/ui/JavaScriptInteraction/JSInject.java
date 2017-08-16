@@ -40,10 +40,9 @@ public class JSInject {
                 "var objs = document.getElementsByTagName(\"img\"); " +
                 "for(var i=0;i<objs.length;i++)  " +
                 "{"
-                +      "var j=i;"
                 +     "objs[i].onclick=function()  " +
                 "    {  "
-                + "        window.imageListener.openImage(this.src,j);  " +
+                + "        window.imageListener.openImage(this.src);  " +
                 "    }  " +
                 "}" +
                 "})()");

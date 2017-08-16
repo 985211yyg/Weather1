@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.yungui.weather.BuildConfig;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by yungui on 2017/6/18.
@@ -15,6 +16,11 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        /**
+         * 内存泄露检测
+         */
+
+        LeakCanary.install(this);
         //获取当前进程的全局的 ，单一的context
         mContext = getApplicationContext();
 

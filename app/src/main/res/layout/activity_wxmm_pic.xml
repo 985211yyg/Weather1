@@ -7,34 +7,51 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.example.yungui.weather.ui.wxmm.WXmmPicActivity">
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="30dp"-->
-    <!--android:background="@color/colorPrimary"-->
-    <!--android:layout_margin="5dp">-->
 
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="1/30"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:textSize="@dimen/sp_18" />-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.08"
+        android:orientation="vertical">
 
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:background="@android:color/transparent"-->
-    <!--android:text="@string/asve"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:textSize="@dimen/sp_18" />-->
-    <!--</RelativeLayout>-->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mm_pic_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/mm_pic_viewPager"
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:layout_weight="1"
+        android:background="@android:color/black"
+        android:orientation="horizontal">
 
-    </android.support.v4.view.ViewPager>
+        <Button
+            android:id="@+id/mm_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@android:color/transparent"
+            android:text="保存"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/mm_count"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_18" />
+
+
+    </RelativeLayout>
+
+
 </LinearLayout>

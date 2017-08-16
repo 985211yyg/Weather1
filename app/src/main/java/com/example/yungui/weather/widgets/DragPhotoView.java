@@ -45,7 +45,7 @@ public class DragPhotoView extends PhotoView {
     public static final float DEFAULT_MIN_SCALE = 1.0f;
 
     //透明度
-    private int mAlpha;
+    private int mAlpha=255;
     //最大的竖直方向的移动距离
     private final static int MAX_TRANSLATE_Y = 400;
 
@@ -85,7 +85,7 @@ public class DragPhotoView extends PhotoView {
     protected void onDraw(Canvas canvas) {
         mPaint.setAlpha(mAlpha);
         //绘制背景
-        canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
+//        canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
         //设置画布的  去除水平方向的移动
         canvas.translate(0, mTranslateY);
         //设置缩放,中心缩放

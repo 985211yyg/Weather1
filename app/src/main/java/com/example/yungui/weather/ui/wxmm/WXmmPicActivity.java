@@ -2,14 +2,13 @@ package com.example.yungui.weather.ui.wxmm;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import com.blankj.utilcode.util.BarUtils;
 import com.example.yungui.weather.R;
-import com.example.yungui.weather.ui.base.BaseActivity;
 import com.example.yungui.weather.ui.base.BasePicActivity;
 import com.example.yungui.weather.ui.wxmm.adapter.PicDetailViewPagerAdapter;
-import com.example.yungui.weather.widgets.mViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,9 @@ public class WXmmPicActivity extends BasePicActivity {
     private int position;
     private ViewPager viewPager;
     private PicDetailViewPagerAdapter viewPagerAdapter;
+
+    private Button save;
+    private TextView count;
 
     @Override
     protected int getLayoutId() {
@@ -33,9 +35,11 @@ public class WXmmPicActivity extends BasePicActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         position = getIntent().getIntExtra("position", 0);
-        Log.e("接受到的position", " "+position );
         imgUrls = getIntent().getStringArrayListExtra("imgs");
-        Log.e("接受到的urls", ""+imgUrls.toString() );
+
+        save = (Button) findViewById(R.id.mm_save);
+        count = (TextView) findViewById(R.id.mm_count);
+
         viewPager = (ViewPager) findViewById(R.id.mm_pic_viewPager);
         viewPagerAdapter = new PicDetailViewPagerAdapter(getSupportFragmentManager(), imgUrls);
         viewPager.setAdapter(viewPagerAdapter);
@@ -48,7 +52,7 @@ public class WXmmPicActivity extends BasePicActivity {
 
             @Override
             public void onPageSelected(int position) {
-
+                count.setText(position+1+"/"+imgUrls.size());
             }
 
             @Override
@@ -56,6 +60,17 @@ public class WXmmPicActivity extends BasePicActivity {
 
             }
         });
+        /**
+         * 保存图片
+         */
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        viewPager.setCurrentItem(position);
     }
 
     @Override

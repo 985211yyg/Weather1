@@ -57,7 +57,7 @@ import rx.schedulers.Schedulers;
  * Created by yungui on 2017/6/19.
  */
 
-public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterface{
+public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterface {
     private Toolbar toolbar;
     private BannerAdapter bannerAdapter;
     private CircleIndicator circleIndicator;
@@ -377,10 +377,12 @@ public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterf
     }
 
     @Override
-    public void openImage(String url, int position) {
-        Log.e(TAG, "openImage: 图片被点击" + url+"position"+position);
+    public void openImage(String url) {
+        //处理URL
+        String newUrl = url.replace("640", "0").substring(0, url.lastIndexOf("jpeg") + 2);
+        int index = imgUrls.indexOf(newUrl);
         Intent intent = new Intent(mContext, WXmmPicActivity.class);
-        intent.putExtra("position", position);
+        intent.putExtra("position", index);
         intent.putStringArrayListExtra("imgs", (ArrayList<String>) imgUrls);
         startActivity(intent);
     }
@@ -389,89 +391,6 @@ public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterf
     public void showToast() {
         Log.e(TAG, ">>>>>>>showToast: ");
     }
-
-
-//    // js 通信接口，定义供 JavaScript 调用的交互接口
-//    private class MyJavascriptInterface {
-//
-//        public MyJavascriptInterface() {
-//        }
-//
-//        /**
-//         * 返回整个页面的HTML数据
-//         *
-//         * @param html
-//         */
-//        @android.webkit.JavascriptInterface
-//        public void showSource(String html) {
-//            //从 HTML 文件中提取页面所有图片对应的地址对象
-//        }
-//
-//        /**
-//         * item点击回调，返回点击的item的URL
-//         *
-//         * @param url
-//         */
-//        @android.webkit.JavascriptInterface
-//        public void getItemUrl(String url) {
-//            Log.e(TAG, ">>>>>>>getItemIndex: " + url);
-//            //可以开始获取万文章详情进行图片
-//            Observable.just(url)
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new Observer<String>() {
-//                        @Override
-//                        public void onCompleted() {
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onNext(String s) {
-//                            preWebView.loadUrl(s);
-//
-//                        }
-//                    });
-//        }
-//
-//        /**
-//         * 显示提示框
-//         */
-//        @JavascriptInterface
-//        public void showToast() {
-//            Log.e(TAG, ">>>>>>>showToast: ");
-//        }
-//
-//        /**
-//         * 点击图片启动新的 ShowImageFromWebActivity，并传入点击图片对应的 url
-//         * 和页面所有图片对应的 url
-//         *
-//         * @param url 点击图片对应的 url
-//         */
-//        @android.webkit.JavascriptInterface
-//        public void openImage(String url,int position) {
-//            Log.e(TAG, "openImage: 图片被点击" + url+"position"+position);
-//            Intent intent = new Intent(mContext, WXmmPicActivity.class);
-//            intent.putExtra("position", position);
-//            intent.putStringArrayListExtra("imgs", (ArrayList<String>) imgUrls);
-//            startActivity(intent);
-//        }
-//
-//        /**
-//         * 获取预加载数据
-//         *
-//         * @param html
-//         */
-//        @JavascriptInterface
-//        public void getPreSource(String html) {
-//            getAllImageUrlFromHtml(html);
-//        }
-//
-//    }
 
     /**
      * /
@@ -510,7 +429,7 @@ public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterf
                 imgUrls.add(matcher.group().substring(0, matcher.group().length() - 1));
             }
         }
-        Log.e(TAG, "getAllImageUrlFormSrcObject: "+imgUrls.size()+imgUrls.toString() );
+        Log.e(TAG, "getAllImageUrlFormSrcObject: " + imgUrls.size() + imgUrls.toString());
         return imgUrls;
     }
 

@@ -2,6 +2,7 @@ package com.example.yungui.weather.http;
 
 import com.example.yungui.weather.http.api.AppController;
 import com.example.yungui.weather.http.api.GirlsController;
+import com.example.yungui.weather.http.api.NHController;
 import com.example.yungui.weather.http.api.VideoController;
 import com.example.yungui.weather.http.api.WeatherController;
 
@@ -15,6 +16,7 @@ public class ApiFactory {
     public static WeatherController weatherController;
     public static GirlsController girlsController;
     public static VideoController videoController;
+    public static NHController nhController;
 
     public static AppController getAppController() {
         if (appController == null) {
@@ -53,6 +55,15 @@ public class ApiFactory {
             }
         }
         return videoController;
+    }
+
+    public static NHController getNhController() {
+        if (nhController == null) {
+            synchronized (monitor) {
+                nhController = RetrofitManager.getInstance().Create(NHController.class);
+            }
+        }
+        return nhController;
     }
 
 

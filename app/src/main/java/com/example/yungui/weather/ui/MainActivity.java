@@ -14,6 +14,8 @@ import com.example.yungui.weather.AppGlobal;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.event.ThemeChangeEvent;
 import com.example.yungui.weather.ui.base.BaseActivity;
+import com.example.yungui.weather.ui.nh.ItemListDialogFragment;
+import com.example.yungui.weather.ui.nh.NHfragment;
 import com.example.yungui.weather.ui.wxmm.WXmmFragment;
 import com.example.yungui.weather.ui.video.VideoFragment;
 import com.example.yungui.weather.ui.setting.SettingActivity;
@@ -28,11 +30,11 @@ import org.greenrobot.eventbus.ThreadMode;
  * https://github.com/afollestad/material-dialogs.git
  */
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener ,ItemListDialogFragment.Listener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
-
+    public static final String FRAGMENT_TAG_NH = "nh";
     public static final String FRAGMENT_TAG_WEATHER = "weather";
     public static final String FRAGMENT_TAG_BUS = "bus";
     public static final String FRAGMENT_TAG_VIDEO = "video";
@@ -80,9 +82,7 @@ public class MainActivity extends BaseActivity
      */
     private void initFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-
-            switchContent(FRAGMENT_TAG_WEATHER);
-
+            switchContent(FRAGMENT_TAG_NH);
         } else {
             //不为空，获取保存的标签
             Current_Fragment_Tag = savedInstanceState.getString(AppGlobal.CURRENT_INDEX);
@@ -121,8 +121,8 @@ public class MainActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_weather) {
-            switchContent(FRAGMENT_TAG_WEATHER);
+        if (id == R.id.nav_nh) {
+            switchContent(FRAGMENT_TAG_NH);
 
         } else if (id == R.id.nav_bus) {
             switchContent(FRAGMENT_TAG_BUS);
@@ -148,17 +148,18 @@ public class MainActivity extends BaseActivity
      * @param fragmentName
      */
     private void switchContent(String fragmentName) {
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         //如果标签为空或者标签没有变化
         if (Current_Fragment_Tag!=null&& Current_Fragment_Tag.equals(fragmentName)) {
             //直接退出
             return;
         }
-        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-        //将原有的fragment从stack中移除
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        //设置过度动画
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         //查找当前fragment
         Fragment CurrentFragment = fragmentManager.findFragmentByTag(Current_Fragment_Tag);
+
         if (CurrentFragment != null) {
             ///隐藏当前的fragment
             transaction.hide(CurrentFragment);
@@ -173,8 +174,8 @@ public class MainActivity extends BaseActivity
                 case FRAGMENT_TAG_BUS:
                     FoundFragment = new WXmmFragment();
                     break;
-                case FRAGMENT_TAG_WEATHER:
-                    FoundFragment = new WeatherFragment();
+                case FRAGMENT_TAG_NH:
+                    FoundFragment = new NHfragment();
                     break;
                 case FRAGMENT_TAG_VIDEO:
                     FoundFragment = new VideoFragment();
@@ -230,5 +231,10 @@ public class MainActivity extends BaseActivity
             EventBus.getDefault().unregister(this);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+
     }
 }

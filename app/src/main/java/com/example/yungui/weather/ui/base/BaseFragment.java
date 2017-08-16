@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
     public static final String TAG = BaseFragment.class.getName();
+
     //标识fragment已经加载完毕
     private boolean isViewPrepared;
     //标识已经触发懒加载
@@ -55,6 +56,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Log.e(TAG, "onAttach: " );
         mContext = context;
     }
 
@@ -62,10 +64,12 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Log.e(TAG, "onCreate: " );
     }
 
     /**
      * 加载布局
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -74,6 +78,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.e(TAG, "onCreateView: " );
         rootView = inflater.inflate(getLayoutID(), container, false);
         initView();
         return rootView;
@@ -82,12 +87,20 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.e(TAG, "onViewCreated: " );
         /*
        视图加载完毕时进行判断加载
          */
         isViewPrepared = true;
+        //判断是否记载过数据
         lazyFetchDataIfPrepared();
 
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e(TAG, "onActivityCreated: " );
     }
 
     @Override
@@ -101,7 +114,6 @@ public abstract class BaseFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
     /**
      *  可见时判断 加载数据
      * @param isVisibleToUser
@@ -109,24 +121,51 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        Log.e(TAG, "setUserVisibleHint: "+isVisibleToUser );
         if (isVisibleToUser) {
             lazyFetchDataIfPrepared();
         }
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
+        Log.e(TAG, "onStart: " );
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: " );
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e(TAG, "onPause: " );
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.e(TAG, "onSaveInstanceState: 0" );
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.e(TAG, "onStop: " );
     }
 
+    /**
+     * 销魂视图
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.e(TAG, "onDestroyView: " );
+        //销毁后重置懒加载
         hasFetchData = false;
         isViewPrepared = false;
     }
@@ -134,6 +173,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.e(TAG, "onDestroy: " );
     }
 
 
@@ -141,6 +181,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        Log.e(TAG, "onDetach: " );
     }
 
     /*

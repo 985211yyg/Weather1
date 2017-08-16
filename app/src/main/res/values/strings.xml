@@ -184,4 +184,24 @@
     <string name="share">分享</string>
     <string name="asve">保存</string>
     <string name="attribute">属性</string>
+    <string name="title_activity_nh">NHActivity</string>
+
+    <string name="title_home">首页</string>
+    <string name="title_story">阅读</string>
+    <string name="title_video">影视</string>
+    <string name="title_picture">影视</string>
+    <string name="title_show">段友秀</string>
+    <string name="title_read">阅读</string>
+    <string name="title_music">音乐</string>
+    <string name="test">首先来解决第一个问题-列表页置于 Header 之下，CoordinatorLayout 继承来自 ViewGroup，默认的布局行为更像是一个 FrameLayout，不是 RelativeLayout 所以并不能用 layout_below 等属性来控制它的相对位置，而某些情况下，我们可以给 Header 的高度设定一个准确值，例如 250dip ，那么我们的的列表页的 marginTop 设置为
+250dip 就好了，但是通常，我们的 Header 高度是不定的，所以我们需要一种能够适配这种变化的方法，所以我能想到的就是重写列表页的 layout 过程，Behavior 提供了 onLayoutChild 方法可以让我们实现，很好；接着来思考列表页上移留白问题，这是因为在 CoordinatorLayout 测量布局完成后，记此时列表高度为 H，但随着 Header 上移 H2 个高度的时候，列表也随着移动一定高度，但是列表高度还是 H，效果不言而喻，所以，我们需要在子 View
+测量的时候，添加上列表的最大偏移量 [H2 - Title容器高度 - Tab容器高度]，下面来看代码，其实这就和系统
+AppBarLayout 下的滚动列表处理一样的，我们会在 AppBarLayout 下放置的 View 设定一个这样的
+
+作者：HelloCsl
+链接：http://www.jianshu.com/p/f7989a2a3ec2
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。首先来解决第一个问题-列表页置于 Header 之下，CoordinatorLayout 继承来自 ViewGroup，默认的布局行为更像是一个 FrameLayout，不是 RelativeLayout 所以并不能用 layout_below 等属性来控制它的相对位置，而某些情况下，我们可以给 Header 的高度设定一个准确值，例如 250dip ，那么我们的的列表页的 marginTop 设置为 250dip 就好了，但是通常，我们的 Header 高度是不定的，所以我们需要一种能够适配这种变化的方法，所以我能想到的就是重写列表页的 layout 过程，Behavior 提供了 onLayoutChild 方法可以让我们实现，很好；接着来思考列表页上移留白问题，这是因为在 CoordinatorLayout 测量布局完成后，记此时列表高度为 H，但随着 Header 上移 H2 个高度的时候，列表也随着移动一定高度，但是列表高度还是 H，效果不言而喻，所以，我们需要在子 View 测量的时候，添加上列表的最大偏移量 [H2 - Title容器高度 - Tab容器高度]，下面来看代码，其实这就和系统 AppBarLayout 下的滚动列表处理一样的，我们会在 AppBarLayout 下放置的 View 设定一个这样的  作者：HelloCsl 链接：http://www.jianshu.com/p/f7989a2a3ec2 來源：简书 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</string>
+
+
 </resources>

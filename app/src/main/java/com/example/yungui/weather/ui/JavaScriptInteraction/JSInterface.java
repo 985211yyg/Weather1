@@ -63,8 +63,8 @@ public class JSInterface {
      * @param url 点击图片对应的 url
      */
     @android.webkit.JavascriptInterface
-    public void openImage(String url,int position) {
-        onJSInterface.openImage(url,position);
+    public void openImage(String url) {
+        onJSInterface.openImage(url);
 
     }
 
@@ -84,7 +84,7 @@ public class JSInterface {
         void getItemUrl(String url);
         void showSource(String html);
         void getPreSource(String html);
-        void openImage(String url, int position);
+        void openImage(String url);
         void showToast();
     }
 

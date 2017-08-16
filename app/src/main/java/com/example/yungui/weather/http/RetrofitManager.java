@@ -109,14 +109,14 @@ public class RetrofitManager {
                 Response response = chain.proceed(request);
                 //如果网络通畅
                 if (NetUtils.isNetWorkReachable(App.getContext())) {
-                    //设置超时事件为0
+                    //设置超时时间为0
                     int maxAge = 0;
                     response.newBuilder()
                             .removeHeader("Pragma")
                             .header("Cache-Control", "public, max-age=" + maxAge)
                             .build();
                 } else {
-                    //无网络是设置超时未一周
+                    //无网络是设置超时为一周
                     int maxStable = 60 * 60 * 24 * 28;
                     response.newBuilder()
                             .removeHeader("Pragma")
@@ -127,7 +127,8 @@ public class RetrofitManager {
             }
         };
         return new OkHttpClient.Builder()
-                .cache(cache).addInterceptor(interceptor)
+                .cache(cache)
+                .addInterceptor(interceptor)
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
