@@ -7,16 +7,25 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.example.yungui.weather.AppGlobal;
 import com.example.yungui.weather.R;
+import com.example.yungui.weather.http.ApiFactory;
+import com.example.yungui.weather.modle.nh.NH_IDList;
 import com.example.yungui.weather.ui.MainActivity;
 import com.example.yungui.weather.ui.base.BaseFragment;
 import com.example.yungui.weather.ui.nh.adapter.NHViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by yungui on 2017/8/9.
@@ -29,9 +38,12 @@ public class NHfragment extends BaseFragment implements
     private BottomNavigationView navigation;
     private ViewPager viewPager;
     private List<Fragment> fragments = new ArrayList<>();
+    private List<String> idList = new ArrayList<>();//传给firstde数据
     private NHViewPagerAdapter viewPagerAdapter;
     private NHReadFragment readFragment;
     private NHFirstFragment firstFragment;
+
+    private Subscription subscription;
 
     public static final String MAIN = "main";
     public static final String READ = "read";
@@ -57,24 +69,46 @@ public class NHfragment extends BaseFragment implements
     protected void initView() {
         toolbar = findView(R.id.toolbar);
         ((MainActivity) getActivity()).initToolbar(toolbar);
-        viewPagerAdapter = new NHViewPagerAdapter(getFragmentManager());
-        viewPagerAdapter.addFragment(NHFirstFragment.newInstance(1), null);
-        viewPagerAdapter.addFragment(NHFirstFragment.newInstance(1), null);
-        viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
-        viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
-
         viewPager = findView(R.id.nh_viewPager);
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.setAdapter(viewPagerAdapter);
-        viewPager.addOnPageChangeListener(this);
-
+        viewPagerAdapter = new NHViewPagerAdapter(getFragmentManager());
         navigation = findView(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+        viewPager.addOnPageChangeListener(this);
+        viewPager.setOffscreenPageLimit(3);
+        viewPagerAdapter.addFragment(NHFirstFragment.newInstance(null), null);
+        viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
+        viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
+        viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
+        viewPager.setAdapter(viewPagerAdapter);
 
     }
 
     @Override
     protected void lazyFetchData() {
+        subscription = ApiFactory
+                .getNhController()
+                .getIDList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<NH_IDList>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e(TAG, "onCompleted: ");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: " + e.toString());
+
+                    }
+
+                    @Override
+                    public void onNext(NH_IDList nh_idList) {
+
+                    }
+                });
+
 
     }
 

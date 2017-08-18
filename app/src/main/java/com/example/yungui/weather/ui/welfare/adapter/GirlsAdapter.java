@@ -1,8 +1,6 @@
 package com.example.yungui.weather.ui.welfare.adapter;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,8 +10,6 @@ import com.example.yungui.weather.modle.Girls;
 import com.example.yungui.weather.widgets.RatioImageView;
 
 import java.util.List;
-
-import uk.co.senab.photoview.PhotoView;
 
 /**
  * Created by yungui on 2017/6/29.

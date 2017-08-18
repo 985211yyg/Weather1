@@ -83,4 +83,12 @@ public class NH_IDList {
     public void setData(List<String> data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "NH_IDList{" +
+                "res=" + res +
+                ", data=" + data.toString() +
+                '}';
+    }
 }

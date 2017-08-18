@@ -1,5 +1,6 @@
 package com.example.yungui.weather.modle.nh;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,52 +24,8 @@ public class NH_DataBean {
     public String toString() {
         return "NH_DataBean{" +
                 "res=" + res +
-                ", data=" + data.toString() +
+                ", data=" + data +
                 '}';
-    }
-
-    public static NH_DataBean objectFromData(String str) {
-
-        return new Gson().fromJson(str, NH_DataBean.class);
-    }
-
-    public static NH_DataBean objectFromData(String str, String key) {
-
-        try {
-            JSONObject jsonObject = new JSONObject(str);
-
-            return new Gson().fromJson(jsonObject.getString(str), NH_DataBean.class);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static List<NH_DataBean> arrayNH_DataBeanFromData(String str) {
-
-        Type listType = new TypeToken<ArrayList<NH_DataBean>>() {
-        }.getType();
-
-        return new Gson().fromJson(str, listType);
-    }
-
-    public static List<NH_DataBean> arrayNH_DataBeanFromData(String str, String key) {
-
-        try {
-            JSONObject jsonObject = new JSONObject(str);
-            Type listType = new TypeToken<ArrayList<NH_DataBean>>() {
-            }.getType();
-
-            return new Gson().fromJson(jsonObject.getString(str), listType);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList();
-
-
     }
 
     public int getRes() {
@@ -92,6 +49,7 @@ public class NH_DataBean {
         private String id;
         private WeatherBean weather;
         private String date;
+        //五个不同的种类
         private List<ContentListBean> content_list;
 
         @Override
@@ -104,49 +62,8 @@ public class NH_DataBean {
                     '}';
         }
 
-        public static DataBean objectFromData(String str) {
-
-            return new Gson().fromJson(str, DataBean.class);
-        }
-
-        public static DataBean objectFromData(String str, String key) {
-
-            try {
-                JSONObject jsonObject = new JSONObject(str);
-
-                return new Gson().fromJson(jsonObject.getString(str), DataBean.class);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        public static List<DataBean> arrayDataBeanFromData(String str) {
-
-            Type listType = new TypeToken<ArrayList<DataBean>>() {
-            }.getType();
-
-            return new Gson().fromJson(str, listType);
-        }
-
-        public static List<DataBean> arrayDataBeanFromData(String str, String key) {
-
-            try {
-                JSONObject jsonObject = new JSONObject(str);
-                Type listType = new TypeToken<ArrayList<DataBean>>() {
-                }.getType();
-
-                return new Gson().fromJson(jsonObject.getString(str), listType);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return new ArrayList();
 
 
-        }
 
         public String getId() {
             return id;
@@ -200,50 +117,6 @@ public class NH_DataBean {
             private String wind_direction;
             private String hurricane;
             private IconsBean icons;
-
-            public static WeatherBean objectFromData(String str) {
-
-                return new Gson().fromJson(str, WeatherBean.class);
-            }
-
-            public static WeatherBean objectFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-
-                    return new Gson().fromJson(jsonObject.getString(str), WeatherBean.class);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            public static List<WeatherBean> arrayWeatherBeanFromData(String str) {
-
-                Type listType = new TypeToken<ArrayList<WeatherBean>>() {
-                }.getType();
-
-                return new Gson().fromJson(str, listType);
-            }
-
-            public static List<WeatherBean> arrayWeatherBeanFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-                    Type listType = new TypeToken<ArrayList<WeatherBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(jsonObject.getString(str), listType);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return new ArrayList();
-
-
-            }
 
             public String getCity_name() {
                 return city_name;
@@ -318,49 +191,6 @@ public class NH_DataBean {
                 private String day;
                 private String night;
 
-                public static IconsBean objectFromData(String str) {
-
-                    return new Gson().fromJson(str, IconsBean.class);
-                }
-
-                public static IconsBean objectFromData(String str, String key) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(str);
-
-                        return new Gson().fromJson(jsonObject.getString(str), IconsBean.class);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    return null;
-                }
-
-                public static List<IconsBean> arrayIconsBeanFromData(String str) {
-
-                    Type listType = new TypeToken<ArrayList<IconsBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(str, listType);
-                }
-
-                public static List<IconsBean> arrayIconsBeanFromData(String str, String key) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(str);
-                        Type listType = new TypeToken<ArrayList<IconsBean>>() {
-                        }.getType();
-
-                        return new Gson().fromJson(jsonObject.getString(str), listType);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    return new ArrayList();
-
-
-                }
 
                 public String getDay() {
                     return day;
@@ -380,14 +210,23 @@ public class NH_DataBean {
             }
         }
 
-        public static class ContentListBean {
+        public static class ContentListBean implements MultiItemEntity{
+            public static final int PIC = 0;
+            //阅读
+            public static final int ONE_WEEK = 1;
+            public static final int ESSAY = 2;
+            public static final int READ = 3;
+
+            public static final int MUSIC = 4;
+            public static final int MOVIE = 5;
+
             /**
              * id : 9070
              * category : 0
              * display_category : 6
              * item_id : 1581
              * title : 绘画
-             * forward : 许多人相信，没有注定的人生，所有的事基本上是一连串的巧合。然而，即使抱持如是信念的人也会有这样的结论：在生命中的某一段时期，当他们回头审视，发现多年来被视为巧合的事，其实是不可避免的。
+             * forward : 许。
              * img_url : http://image.wufazhuce.com/FgV1sJRhHYefN8FNRkJJIXpKbI97
              * like_count : 3166
              * post_date : 2017-01-08 06:00:00
@@ -417,14 +256,12 @@ public class NH_DataBean {
              * content_type : 0
              * content_bgcolor : #FFFFFF
              * share_url : http://m.wufazhuce.com/one/1581
-             * share_info : {"url":"http://m.wufazhuce.com/one/1581","image":"http://image.wufazhuce.com/FgV1sJRhHYefN8FNRkJJIXpKbI97","title":"VOL.1555","content":"许多人相信，没有注定的人生，所有的事基本上是一连串的巧合。然而，即使抱持如是信念的人也会有这样的结论：在生命中的某一段时期，当他们回头审视，发现多年来被视为巧合的事，其实是不可避免的。"}
+             * share_info : {"url":"http://m.wufazhuce.com/one/1581","image":"http://image.wufazhuce.com/FgV1sJRhHYefN8FNRkJJIXpKbI97","title":"VOL.1555","content":"许的。"}
              * orientation : 0
-             * music_name : 来来回回
-             * audio_author : 陈楚生
              */
 
             private String id;
-            private String category;
+            private int category;
             private int display_category;
             private String item_id;
             private String title;
@@ -459,15 +296,13 @@ public class NH_DataBean {
             private String share_url;
             private ShareInfoBean share_info;
             private String orientation;
-            private String music_name;
-            private String audio_author;
             private List<?> serial_list;
 
             @Override
             public String toString() {
                 return "ContentListBean{" +
                         "id='" + id + '\'' +
-                        ", category='" + category + '\'' +
+                        ", category=" + category +
                         ", display_category=" + display_category +
                         ", item_id='" + item_id + '\'' +
                         ", title='" + title + '\'' +
@@ -502,54 +337,13 @@ public class NH_DataBean {
                         ", share_url='" + share_url + '\'' +
                         ", share_info=" + share_info +
                         ", orientation='" + orientation + '\'' +
-                        ", music_name='" + music_name + '\'' +
-                        ", audio_author='" + audio_author + '\'' +
                         ", serial_list=" + serial_list +
                         '}';
             }
 
-            public static ContentListBean objectFromData(String str) {
-
-                return new Gson().fromJson(str, ContentListBean.class);
-            }
-
-            public static ContentListBean objectFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-
-                    return new Gson().fromJson(jsonObject.getString(str), ContentListBean.class);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            public static List<ContentListBean> arrayContentListBeanFromData(String str) {
-
-                Type listType = new TypeToken<ArrayList<ContentListBean>>() {
-                }.getType();
-
-                return new Gson().fromJson(str, listType);
-            }
-
-            public static List<ContentListBean> arrayContentListBeanFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-                    Type listType = new TypeToken<ArrayList<ContentListBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(jsonObject.getString(str), listType);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return new ArrayList();
-
-
+            @Override
+            public int getItemType() {
+                return category;
             }
 
             public String getId() {
@@ -560,11 +354,11 @@ public class NH_DataBean {
                 this.id = id;
             }
 
-            public String getCategory() {
+            public int getCategory() {
                 return category;
             }
 
-            public void setCategory(String category) {
+            public void setCategory(int category) {
                 this.category = category;
             }
 
@@ -840,22 +634,6 @@ public class NH_DataBean {
                 this.orientation = orientation;
             }
 
-            public String getMusic_name() {
-                return music_name;
-            }
-
-            public void setMusic_name(String music_name) {
-                this.music_name = music_name;
-            }
-
-            public String getAudio_author() {
-                return audio_author;
-            }
-
-            public void setAudio_author(String audio_author) {
-                this.audio_author = audio_author;
-            }
-
             public List<?> getSerial_list() {
                 return serial_list;
             }
@@ -865,48 +643,101 @@ public class NH_DataBean {
             }
 
             public static class AuthorBean {
-                public static AuthorBean objectFromData(String str) {
 
-                    return new Gson().fromJson(str, AuthorBean.class);
+
+                /**
+                 * user_id : 7653522
+                 * user_name : 李森
+                 * desc : 前媒体人，微博@开海
+                 * wb_name : @开海
+                 * is_settled : 0
+                 * settled_type : 0
+                 * summary : 前媒体人
+                 * fans_total : 2
+                 * web_url : http://image.wufazhuce.com/Fmus_QDSbfk4p1Y268J37Ut8xsnP
+                 */
+
+                private String user_id;
+                private String user_name;
+                private String desc;
+                private String wb_name;
+                private String is_settled;
+                private String settled_type;
+                private String summary;
+                private String fans_total;
+                private String web_url;
+
+
+                public String getUser_id() {
+                    return user_id;
                 }
 
-                public static AuthorBean objectFromData(String str, String key) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(str);
-
-                        return new Gson().fromJson(jsonObject.getString(str), AuthorBean.class);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    return null;
+                public void setUser_id(String user_id) {
+                    this.user_id = user_id;
                 }
 
-                public static List<AuthorBean> arrayAuthorBeanFromData(String str) {
-
-                    Type listType = new TypeToken<ArrayList<AuthorBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(str, listType);
+                public String getUser_name() {
+                    return user_name;
                 }
 
-                public static List<AuthorBean> arrayAuthorBeanFromData(String str, String key) {
+                public void setUser_name(String user_name) {
+                    this.user_name = user_name;
+                }
 
-                    try {
-                        JSONObject jsonObject = new JSONObject(str);
-                        Type listType = new TypeToken<ArrayList<AuthorBean>>() {
-                        }.getType();
+                public String getDesc() {
+                    return desc;
+                }
 
-                        return new Gson().fromJson(jsonObject.getString(str), listType);
+                public void setDesc(String desc) {
+                    this.desc = desc;
+                }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                public String getWb_name() {
+                    return wb_name;
+                }
 
-                    return new ArrayList();
+                public void setWb_name(String wb_name) {
+                    this.wb_name = wb_name;
+                }
 
+                public String getIs_settled() {
+                    return is_settled;
+                }
 
+                public void setIs_settled(String is_settled) {
+                    this.is_settled = is_settled;
+                }
+
+                public String getSettled_type() {
+                    return settled_type;
+                }
+
+                public void setSettled_type(String settled_type) {
+                    this.settled_type = settled_type;
+                }
+
+                public String getSummary() {
+                    return summary;
+                }
+
+                public void setSummary(String summary) {
+                    this.summary = summary;
+                }
+
+                public String getFans_total() {
+                    return fans_total;
+                }
+
+                public void setFans_total(String fans_total) {
+                    this.fans_total = fans_total;
+                }
+
+                public String getWeb_url() {
+                    return web_url;
+                }
+
+                public void setWeb_url(String web_url) {
+                    this.web_url = web_url;
                 }
             }
 
@@ -915,57 +746,13 @@ public class NH_DataBean {
                  * url : http://m.wufazhuce.com/one/1581
                  * image : http://image.wufazhuce.com/FgV1sJRhHYefN8FNRkJJIXpKbI97
                  * title : VOL.1555
-                 * content : 许多人相信，没有注定的人生，所有的事基本上是一连串的巧合。然而，即使抱持如是信念的人也会有这样的结论：在生命中的某一段时期，当他们回头审视，发现多年来被视为巧合的事，其实是不可避免的。
+                 * content : 许的。
                  */
 
                 private String url;
                 private String image;
                 private String title;
                 private String content;
-
-                public static ShareInfoBean objectFromData(String str) {
-
-                    return new Gson().fromJson(str, ShareInfoBean.class);
-                }
-
-                public static ShareInfoBean objectFromData(String str, String key) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(str);
-
-                        return new Gson().fromJson(jsonObject.getString(str), ShareInfoBean.class);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    return null;
-                }
-
-                public static List<ShareInfoBean> arrayShareInfoBeanFromData(String str) {
-
-                    Type listType = new TypeToken<ArrayList<ShareInfoBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(str, listType);
-                }
-
-                public static List<ShareInfoBean> arrayShareInfoBeanFromData(String str, String key) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(str);
-                        Type listType = new TypeToken<ArrayList<ShareInfoBean>>() {
-                        }.getType();
-
-                        return new Gson().fromJson(jsonObject.getString(str), listType);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    return new ArrayList();
-
-
-                }
 
                 public String getUrl() {
                     return url;

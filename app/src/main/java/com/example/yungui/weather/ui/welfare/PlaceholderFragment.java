@@ -3,9 +3,6 @@ package com.example.yungui.weather.ui.welfare;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.DragEvent;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
@@ -13,10 +10,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.ui.base.BaseFragment;
 import com.example.yungui.weather.widgets.DragPhotoView;
-import com.example.yungui.weather.widgets.RatioImageView;
-
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * A placeholder fragment containing a simple view.

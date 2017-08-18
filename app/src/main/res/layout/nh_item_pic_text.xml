@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_4"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/first_type"
+        style="@style/TextAppearance.Design.Snackbar.Message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/first_img"
+        android:gravity="center_horizontal"
+        android:textSize="16sp"
+        tools:text="- 摄影 -" />
+
+    <TextView
+        android:id="@+id/first_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="2dp"
+        tools:text="2017/8/18" />
+
+
+    <com.example.yungui.weather.widgets.RatioImageView
+        android:id="@+id/first_img"
+        android:layout_width="match_parent"
+        android:layout_height="187dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@mipmap/a1240" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/first_vol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            tools:text="VOL1777" />
+
+        <TextView
+            android:id="@+id/first_desc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            tools:text="摄影 | Mike Wilson" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/first_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginRight="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_toRightOf="@+id/first_img"
+        android:textSize="@dimen/sp_16"
+        tools:text="@string/tesxt_test" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/first_author"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="@dimen/dp_4"-->
+    <!--android:gravity="center_horizontal"-->
+    <!--tools:text="本拉登*等卡本" />-->
+
+</LinearLayout>

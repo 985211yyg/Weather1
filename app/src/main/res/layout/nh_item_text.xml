@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_4"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TextAppearance.Design.Snackbar.Message"
+        android:id="@+id/read_type"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:layout_toRightOf="@+id/first_img"
+        android:gravity="center_horizontal"
+        android:textSize="16sp"
+        tools:text="- STORY -" />
+
+    <TextView
+        android:id="@+id/read_title"
+        style="@style/TextAppearance.Design.Snackbar.Message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp_4"
+        android:textSize="@dimen/sp_18"
+        tools:text="怀着极恐的心情细思下去" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/read_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            tools:text="文/王嫣云" />
+
+        <TextView
+            android:id="@+id/read_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:gravity="right"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            tools:text="2017/7/9" />
+    </LinearLayout>
+
+    <com.example.yungui.weather.widgets.RatioImageView
+        android:id="@+id/read_img"
+        android:layout_width="match_parent"
+        android:layout_height="187dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@mipmap/a1240" />
+
+
+    <TextView
+        android:id="@+id/read_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginRight="@dimen/dp_4"
+        android:layout_toRightOf="@+id/first_img"
+        android:textSize="@dimen/sp_16"
+        tools:text="@string/tesxt_test" />
+
+
+</LinearLayout>

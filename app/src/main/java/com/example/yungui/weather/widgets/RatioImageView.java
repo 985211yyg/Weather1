@@ -1,12 +1,8 @@
 package com.example.yungui.weather.widgets;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
-
-import uk.co.senab.photoview.PhotoView;
 
 /**  根据获得的图片的大小重新绘制imageview
  * Created by yungui on 2017/6/30.

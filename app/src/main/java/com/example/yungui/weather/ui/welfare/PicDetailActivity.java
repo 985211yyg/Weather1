@@ -3,7 +3,6 @@ package com.example.yungui.weather.ui.welfare;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -17,8 +16,6 @@ import com.example.yungui.weather.ui.welfare.adapter.SectionsPagerAdapter;
 import com.example.yungui.weather.widgets.DragPhotoView;
 
 import java.util.ArrayList;
-
-import uk.co.senab.photoview.PhotoView;
 
 public class PicDetailActivity extends BasePicActivity implements View.OnClickListener,
         DragPhotoView.OnExitListener,DragPhotoView.OnTapListener {
