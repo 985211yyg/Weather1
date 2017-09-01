@@ -1,6 +1,9 @@
 package com.example.yungui.weather.anim;
 
-import com.example.yungui.weather.ui.nh.NHFirstFragment;
+import android.app.Activity;
+import android.content.Context;
+
+import com.example.yungui.weather.ui.nh.fragment.NHFirstFragment;
 import com.sdsmdg.harjot.vectormaster.VectorMasterView;
 import com.sdsmdg.harjot.vectormaster.models.ClipPathModel;
 import com.sdsmdg.harjot.vectormaster.models.GroupModel;
@@ -19,9 +22,9 @@ public class Animation {
     float rotation = 0;
     /**
      * 加载动画
-     * @param nhFirstFragment
+     * @param activity
      */
-    public  void animateHourglass(final NHFirstFragment nhFirstFragment, VectorMasterView hourglassView) {
+    public  void animateHourglass(final Activity activity, VectorMasterView hourglassView) {
         final GroupModel frame = hourglassView.getGroupModelByName("hourglass_frame");
         final GroupModel fillOutlines = hourglassView.getGroupModelByName("fill_outlines");
         final GroupModel fillOutlinesPivot = hourglassView.getGroupModelByName("fill_outlines_pivot");
@@ -63,12 +66,12 @@ public class Animation {
                         state = 0;
                     }
                 }
-//                nhFirstFragment.getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        hourglassView.update();        // Update the view from the UI thread
-//                    }
-//                });
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hourglassView.update();        // Update the view from the UI thread
+                    }
+                });
             }
         }, 500, 1000 / 60);
     }

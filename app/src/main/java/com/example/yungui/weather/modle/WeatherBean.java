@@ -6,10 +6,10 @@ package com.example.yungui.weather.modle;
 
 public class WeatherBean {
 
-    private String code;
-    private String cname;
-    private String ename;
-    private String icon;
+    private String code;//天气类型编号
+    private String cname;//天气名称
+    private String ename;//对应英文
+    private String icon;//对应图标链接
 
     public String getCode() {
         return code;

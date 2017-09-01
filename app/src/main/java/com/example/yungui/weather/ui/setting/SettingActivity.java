@@ -9,6 +9,7 @@ import com.example.yungui.weather.R;
 import com.example.yungui.weather.event.ThemeChangeEvent;
 import com.example.yungui.weather.ui.base.BaseActivity;
 import com.example.yungui.weather.utils.SettingUtil;
+import com.example.yungui.weather.utils.ThemeUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -49,10 +50,11 @@ public class SettingActivity extends BaseActivity implements ColorChooserDialog.
 
     @Override
     public void onColorSelection(@NonNull ColorChooserDialog dialog, int selectedColor) {
-//        //获取主题的颜色值，如果选择的颜色与当前主题的颜色一致，则直接退出，不做任何改变
-//        if (selectedColor == ThemeUtil.getThemeColor(this, R.attr.colorPrimary)) {
-//            return;
-//        }
+        //获取主题的颜色值，如果选择的颜色与当前主题的颜色一致，则直接退出，不做任何改变
+        if (selectedColor == ThemeUtil.getThemeColor(this, R.attr.colorPrimary)) {
+            return;
+        }
+        //版本大于21
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //设状态栏的颜色
             getWindow().setStatusBarColor(selectedColor);
@@ -76,7 +78,7 @@ public class SettingActivity extends BaseActivity implements ColorChooserDialog.
             setTheme(R.style.RedTheme);
             SettingUtil.setTheme(5);
         } else if (selectedColor == getResources().getColor(R.color.colorPrimary)) {
-            setTheme(R.style.AppTheme);
+            setTheme(R.style.MyTheme);
             SettingUtil.setTheme(6);
         }
         this.recreate();

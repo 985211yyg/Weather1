@@ -18,15 +18,34 @@ public class JSInject {
                 + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
     }
 
+    /**
+     * 注入JS，凶获得的页面中获取已加载页面所有图片地址
+     * @param view
+     */
+    public static void addJsForAllImages(WebView view) {
+
+        view.loadUrl("javascript:window.allImages.getImagesFromSource('<head>'+"
+                + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+    }
+
 
     /**
      * 注入 js 函数监听，这段 js 函数的功能就是获取webviewd加载完初始页面的htmlshuju
      * 此方法在onpageFish()中值调用一次
      */
-    private static void addJsForHtmlSource(WebView view) {
+    public static void addJsForHtmlSource(WebView view) {
 
         view.loadUrl("javascript:window.local_obj.showSource('<head>'+"
                 + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+    }
+    /*
+    注入js获取主要内容
+     */
+
+    public static void addJsForTextContent(WebView view) {
+
+        view.loadUrl("javascript:window.local_obj.getTextContent("
+                + "document.getElementsByClassName('text-content')[0].innerHTML);");
     }
 
     /**
@@ -52,6 +71,24 @@ public class JSInject {
      * 注入js 添加item的点击事件，获取点击的index
      */
     public static void addItemClickListener(WebView view) {
+        view.loadUrl("javascript:(function(){" +
+                "var objs = document.getElementsByClassName(\"list_item\");" +
+//                "window.itemListener.showToast();"+
+//                "var objs = document.getElementsByTagName(\"a\"); " +
+                "for(var i=0;i<objs.length;i++)  " +
+                "{"
+                + "    objs[i].onclick=function()  " +
+                "    {  "
+                + "       window.itemListener.getItemUrl(this.href);  " +
+
+                "    }  " +
+                "}" +
+                "})()");
+    }
+    /**
+     * 注入js 添加item的点击事件，获取点击的index
+     */
+    public static void addItemClickListener(WebView view,String itemName) {
         view.loadUrl("javascript:(function(){" +
                 "var objs = document.getElementsByClassName(\"list_item\");" +
 //                "window.itemListener.showToast();"+

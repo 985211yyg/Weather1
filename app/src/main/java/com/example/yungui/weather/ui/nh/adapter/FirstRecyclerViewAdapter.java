@@ -38,7 +38,7 @@ public class FirstRecyclerViewAdapter extends BaseMultiItemQuickAdapter<NH_DataB
                 helper.setText(R.id.first_desc, "摄影|" + item.getPic_info());
                 Glide.with(mContext)
                         .load(item.getImg_url())
-                        .into((ImageView) helper.getView(R.id.first_img));
+                        .into((ImageView) helper.getView(R.id.img));
 
                 break;
             case NH_DataBean.DataBean.ContentListBean.ONE_WEEK:
@@ -47,12 +47,12 @@ public class FirstRecyclerViewAdapter extends BaseMultiItemQuickAdapter<NH_DataB
                 helper.setText(R.id.read_content, item.getForward());
                 helper.setText(R.id.read_type, "- 阅读 -");
                 helper.setText(R.id.read_time, item.getPost_date().substring(0, 10));
-                helper.setText(R.id.read_author, "文|" + item.getAuthor().getUser_name());
+                helper.setText(R.id.read_author, " ·文|" + item.getAuthor().getUser_name());
                 helper.setText(R.id.read_title, item.getTitle());
 
                 Glide.with(mContext)
                         .load(item.getImg_url())
-                        .into((ImageView) helper.getView(R.id.read_img));
+                        .into((ImageView) helper.getView(R.id.img));
                 break;
 
             case NH_DataBean.DataBean.ContentListBean.MUSIC:
@@ -65,7 +65,7 @@ public class FirstRecyclerViewAdapter extends BaseMultiItemQuickAdapter<NH_DataB
 
                 Glide.with(mContext)
                         .load(item.getImg_url())
-                        .into((ImageView) helper.getView(R.id.music_img));
+                        .into((ImageView) helper.getView(R.id.img));
 
 
                 break;
@@ -73,13 +73,13 @@ public class FirstRecyclerViewAdapter extends BaseMultiItemQuickAdapter<NH_DataB
                 helper.setText(R.id.movie_content, item.getForward());
                 helper.setText(R.id.movie_time, item.getPost_date().substring(0, 10));
                 helper.setText(R.id.movie_type, "- 电影 -");
-                helper.setText(R.id.movie_author, "文|" + item.getAuthor().getUser_name());
+                helper.setText(R.id.movie_author, "·文|" + item.getAuthor().getUser_name());
                 helper.setText(R.id.movie_title, item.getTitle());
                 helper.setText(R.id.movie_about, "---关于"+"《"+item.getSubtitle()+"》");
 
                 Glide.with(mContext)
                         .load(item.getImg_url())
-                        .into((ImageView) helper.getView(R.id.movie_img));
+                        .into((ImageView) helper.getView(R.id.img));
                 break;
         }
     }

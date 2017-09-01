@@ -1,6 +1,9 @@
 package com.example.yungui.weather.utils;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -270,6 +274,43 @@ public class FileUtil {
         FileUtil.makeDirs(dir);
         return dir;
     }
+
+    /**
+     * 根据图片名字获取图片id
+     * @param imageName
+     * @param context
+     * @return
+     */
+    public static int getResource(String imageName, Context context) {
+        int resId = context.getResources()
+                .getIdentifier(imageName, "drawable", context.getPackageName());
+        return resId;
+    }
+
+    /**
+     * 根据名字从Assets中读取图片
+     * @param fileName
+     * @return
+     */
+    public static Bitmap getImageFromAssetsFile(String fileName,Context context )
+    {
+        Bitmap image = null;
+        AssetManager am =context.getResources().getAssets();
+        try
+        {
+            InputStream is = am.open(fileName);
+            image = BitmapFactory.decodeStream(is);
+            is.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return image;
+
+    }
+
 }
 
 

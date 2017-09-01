@@ -28,10 +28,11 @@ import rx.schedulers.Schedulers;
 public class WeatherUtil {
 
     private static WeatherUtil instance;
-    //存储天气
+    //存储天不同的天气
     private Map<String, WeatherBean> weatherBeanMap;
 
     private WeatherUtil() {
+
         weatherBeanMap = new HashMap<>();
         //将本地资源解析成数据model
         List<WeatherBean> weatherBeans = RetrofitManager.gson()
@@ -39,6 +40,7 @@ public class WeatherUtil {
                 }.getType());
         //讲获得的数据以键值对的形式存储
         for (WeatherBean bean : weatherBeans) {
+
             weatherBeanMap.put(bean.getCode(), bean);
         }
     }
@@ -47,15 +49,15 @@ public class WeatherUtil {
      * 从assets中获取资源,返回资源字符串
      */
     private String readFromAssets() {
+
         try {
             InputStream inputStream = App.getContext().getAssets().open("weather1.json");
-            //获取steamyou有效的字节数
+            //获取steam有效的字节数
             int size = inputStream.available();
             //创建一个size长度的字节数组
             byte[] buffer = new byte[size];
             //一字节的形式读取获取的asset资源
             inputStream.read(buffer);
-
             inputStream.close();
             //将字节转换为字符串
             return new String(buffer, "utf-8");
@@ -84,9 +86,10 @@ public class WeatherUtil {
      * @return
      */
     public Observable<WeatherBean> getWeatherDict(final String code) {
-        return rx.Observable.unsafeCreate(new rx.Observable.OnSubscribe<WeatherBean>() {
+        return Observable.unsafeCreate(new Observable.OnSubscribe<WeatherBean>() {
             @Override
             public void call(Subscriber<? super WeatherBean> subscriber) {
+                //发射数据
                 subscriber.onNext(WeatherUtil.getInstance().weatherBeanMap.get(code));
                 subscriber.onCompleted();
             }
@@ -95,7 +98,6 @@ public class WeatherUtil {
     }
 
     public Observable<String> getWeatherKey() {
-
         //获取本地key
         Observable<String> localKey = Observable.unsafeCreate(new Observable.OnSubscribe<String>() {
             @Override
@@ -142,26 +144,31 @@ public class WeatherUtil {
      */
     public void saveDailyHistory(HeWeather5 heWeather5) {
         //转换heWeather5为observable对像发送，然后惊醒过滤名将空值过滤除去
-        Observable.just(heWeather5).filter(new Func1<HeWeather5, Boolean>() {
-            @Override
-            public Boolean call(HeWeather5 heWeather5) {
-                return heWeather5 != null;
-            }
-            //进行变换
-        }).map(new Func1<HeWeather5, Boolean>() {
-            @Override
-            public Boolean call(HeWeather5 heWeather5) {
-                //缓存g工具
-                ACache cache = ACache.get(App.getContext());
-                //缓存
-                for (HeWeather5.DailyForecastBean dailyForecastBean : heWeather5.getDaily_forecast()) {
-                    //缓存七天
-                    cache.put(dailyForecastBean.getDate(), dailyForecastBean, 7 * 24 * 60 * 60);
-                }
-                //缓存完成
-                return true;
-            }
-        }).subscribeOn(Schedulers.io()).subscribe();
+        Observable
+                .just(heWeather5)
+                .filter(new Func1<HeWeather5, Boolean>() {
+                    @Override
+                    public Boolean call(HeWeather5 heWeather5) {
+                        return heWeather5 != null;
+                    }
+                    //进行变换
+                })
+                .map(new Func1<HeWeather5, Boolean>() {
+                    @Override
+                    public Boolean call(HeWeather5 heWeather5) {
+                        //缓存g工具
+                        ACache cache = ACache.get(App.getContext());
+                        //缓存
+                        for (HeWeather5.DailyForecastBean dailyForecastBean : heWeather5.getDaily_forecast()) {
+                            //缓存七天
+                            cache.put(dailyForecastBean.getDate(), dailyForecastBean, 7 * 24 * 60 * 60);
+                        }
+                        //缓存完成
+                        return true;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     /**

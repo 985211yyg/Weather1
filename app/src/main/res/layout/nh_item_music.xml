@@ -29,20 +29,12 @@
         android:textSize="18sp"
         tools:text="怀着极恐的心情细思下去" />
 
-    <TextView
-        android:id="@+id/music_author"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/dp_4"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="16sp"
-
-        tools:text="文/王嫣云" />
 
     <com.example.yungui.weather.widgets.RatioImageView
-        android:id="@+id/music_img"
+        android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="187dp"
+        android:layout_marginTop="@dimen/dp_10"
         android:scaleType="centerCrop"
         tools:srcCompat="@mipmap/a1240" />
 
@@ -52,6 +44,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dp_4"
         android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/sp_12"
         tools:text="白衣飘飘的年代*叶蓓|中级课堂十二期" />
 
@@ -62,16 +55,41 @@
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/dp_4"
         android:layout_toRightOf="@+id/first_img"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/sp_16"
         tools:text="奔走人世，莫忘前世是书生" />
 
-    <TextView
-        android:id="@+id/music_time"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/dp_4"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_10"
-        tools:text="2017/7/9" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/music_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:textColor="@android:color/black"
+
+            android:textSize="14sp"
+            tools:text="· 文/王嫣云" />
+
+        <TextView
+            android:gravity="right"
+            android:id="@+id/music_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_10"
+            tools:text="2017/7/9" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

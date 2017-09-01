@@ -18,55 +18,34 @@ public class NH_ReadingList {
     //data有十个数据，1-9为阅读，10为问答
     /**
      * res : 0
-     * data : [{"id":"9264","category":"1","display_category":6,"item_id":"1715","title":"战斗民族俄罗斯民风彪悍，不过是酒后幻觉","forward":"俄罗斯人没有你想象的那么能喝。狂饮文化的背后，政府才是最大赢家。","img_url":"http://image.wufazhuce.com/FqoRcMKEf_oKPrY1_MGOJu-ihwgi","like_count":45,"post_date":"2017-01-08 12:00:00","last_update_date":"2017-01-07 13:36:12","author":{"user_id":"7656102","user_name":"朱凯","desc":"朱凯，「浪潮工作室」作者。浪潮工作室，严肃不正经，客观不中立。ID：WelleStudio163","wb_name":"","is_settled":"0","settled_type":"0","summary":"朱凯，浪潮工作室作者。","fans_total":"2","web_url":"http://image.wufazhuce.com/FrNnh7d6oGYuusI4hG4z29rHG2jv"},"video_url":"","audio_url":"","audio_platform":2,"start_video":"","volume":0,"pic_info":"","words_info":"","subtitle":"","number":0,"serial_id":0,"serial_list":[],"movie_story_id":0,"ad_id":0,"ad_type":0,"ad_pvurl":"","ad_linkurl":"","ad_makettime":"","ad_closetime":"","ad_share_cnt":"","ad_pvurl_vendor":"","content_id":"1715","content_type":"1","content_bgcolor":"#FFFFFF","share_url":"http://m.wufazhuce.com/article/1715","share_info":{"url":"http://m.wufazhuce.com/article/1715","image":"http://image.wufazhuce.com/FqoRcMKEf_oKPrY1_MGOJu-ihwgi","title":"战斗民族俄罗斯民风彪悍，不过是酒后的幻觉 作者/朱凯","content":"\u201c伏特加当水喝\u201d只不过是一场酒后的幻觉。狂欢过后，政府才是最大赢家。"}},{"id":"9254","category":"3","display_category":6,"item_id":"1593","title":"钢铁侠能要回他爸送给美国队长的盾吗？","forward":"这个盾反复殴打赠与人的亲儿子钢铁侠，深深地伤害了妮妮的肉体和感情。","img_url":"http://image.wufazhuce.com/FuhlkQNuzNWdyo4WfVkMY8z0Gu1w","like_count":272,"post_date":"2017-01-07 06:05:00","last_update_date":"2017-01-08 13:00:39","author":{"user_id":"0","user_name":"lilizhou问道","web_url":"","summary":"","desc":"","is_settled":"","settled_type":"","fans_total":"","wb_name":""},"video_url":"","audio_url":"","audio_platform":2,"start_video":"","volume":0,"pic_info":"","words_info":"","subtitle":"","number":0,"serial_id":0,"serial_list":[],"movie_story_id":0,"ad_id":0,"ad_type":0,"ad_pvurl":"","ad_linkurl":"","ad_makettime":"","ad_closetime":"","ad_share_cnt":"","ad_pvurl_vendor":"","content_id":"1593","content_type":"3","content_bgcolor":"#FFFFFF","share_url":"http://m.wufazhuce.com/question/1593","share_info":{"url":"http://m.wufazhuce.com/question/1593","image":"http://image.wufazhuce.com/FuhlkQNuzNWdyo4WfVkMY8z0Gu1w","title":"美国队长的盾是钢铁侠的爸爸送的，那么钢铁侠有权利要回来吗？","content":"美国队长的盾是钢铁侠的爸爸送的，那么钢铁侠有权利要回来吗？                                 "},"answerer":{"user_id":"7566818","user_name":"温义飞","desc":"one热门回答者。","wb_name":"","is_settled":"0","settled_type":"0","summary":"回答者。","fans_total":"6","web_url":"http://image.wufazhuce.com/FjN55lHN2vK5VgA5c1c8opFeUrG1"}}]
+     * data : [{"id":"9264",
+     *          "category":"1",
+     *          "display_category":6,
+     *          "item_id":"1715",
+     *          "title":"战斗民族俄罗斯民风彪悍，不过是酒后幻觉",
+     *          "forward":"俄罗斯人没有你想象的那么能喝。狂饮文化的背后，政府才是最大赢家。",
+     *          "img_url":"http://image.wufazhuce.com/FqoRcMKEf_oKPrY1_MGOJu-ihwgi",
+     *          "like_count":45,"post_date":"2017-01-08 12:00:00",
+     *          "last_update_date":"2017-01-07 13:36:12",
+     *          "author":{"user_id":"7656102","
+     *                     user_name":"朱凯",
+     *                     "desc":"朱凯，「浪潮工作室」作者。浪潮工作室，严肃不正经，客观不中立。
+     *                     ID：WelleStudio163",
+     *                     "wb_name":"",
+     *                     "is_settled":"0","settled_type":"0","summary":"朱凯，浪潮工作室作者。",
+     *                     "fans_total":"2","web_url":"http://image.wufazhuce.com/FrNnh7d6oGYuusI4hG4z29rHG2jv"},
+     *                     "video_url":"","audio_url":"","audio_platform":2,
+     *                     "start_video":"","volume":0,"pic_info":"",
+     *                     "words_info":"","subtitle":"","number":0,"serial_id":0,"serial_list":[],
+     *                     "movie_story_id":0,"ad_id":0,"ad_type":0,"ad_pvurl":"",
+     *                     "ad_linkurl":"","ad_makettime":"","ad_closetime":"",
+     *                     "ad_share_cnt":"","ad_pvurl_vendor":"","content_id":"1715",
+     *                     "content_type":"1","content_bgcolor":"#FFFFFF","share_url":"http://m.wufazhuce.com/article/1715","share_info":{"url":"http://m.wufazhuce.com/article/1715","image":"http://image.wufazhuce.com/FqoRcMKEf_oKPrY1_MGOJu-ihwgi","title":"战斗民族俄罗斯民风彪悍，不过是酒后的幻觉 作者/朱凯","content":"\u201c伏特加当水喝\u201d只不过是一场酒后的幻觉。狂欢过后，政府才是最大赢家。"}},{"id":"9254","category":"3","display_category":6,"item_id":"1593","title":"钢铁侠能要回他爸送给美国队长的盾吗？","forward":"这个盾反复殴打赠与人的亲儿子钢铁侠，深深地伤害了妮妮的肉体和感情。","img_url":"http://image.wufazhuce.com/FuhlkQNuzNWdyo4WfVkMY8z0Gu1w","like_count":272,"post_date":"2017-01-07 06:05:00","last_update_date":"2017-01-08 13:00:39","author":{"user_id":"0","user_name":"lilizhou问道","web_url":"","summary":"","desc":"","is_settled":"","settled_type":"","fans_total":"","wb_name":""},"video_url":"","audio_url":"","audio_platform":2,"start_video":"","volume":0,"pic_info":"","words_info":"","subtitle":"","number":0,"serial_id":0,"serial_list":[],"movie_story_id":0,"ad_id":0,"ad_type":0,"ad_pvurl":"","ad_linkurl":"","ad_makettime":"","ad_closetime":"","ad_share_cnt":"","ad_pvurl_vendor":"","content_id":"1593","content_type":"3","content_bgcolor":"#FFFFFF","share_url":"http://m.wufazhuce.com/question/1593","share_info":{"url":"http://m.wufazhuce.com/question/1593","image":"http://image.wufazhuce.com/FuhlkQNuzNWdyo4WfVkMY8z0Gu1w","title":"美国队长的盾是钢铁侠的爸爸送的，那么钢铁侠有权利要回来吗？","content":"美国队长的盾是钢铁侠的爸爸送的，那么钢铁侠有权利要回来吗？                                 "},"answerer":{"user_id":"7566818","user_name":"温义飞","desc":"one热门回答者。","wb_name":"","is_settled":"0","settled_type":"0","summary":"回答者。","fans_total":"6","web_url":"http://image.wufazhuce.com/FjN55lHN2vK5VgA5c1c8opFeUrG1"}}]
      */
 
     private int res;
     private List<DataBean> data;
 
-    public static NH_ReadingList objectFromData(String str) {
-
-        return new Gson().fromJson(str, NH_ReadingList.class);
-    }
-
-    public static NH_ReadingList objectFromData(String str, String key) {
-
-        try {
-            JSONObject jsonObject = new JSONObject(str);
-
-            return new Gson().fromJson(jsonObject.getString(str), NH_ReadingList.class);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static List<NH_ReadingList> arrayNH_ReadingListFromData(String str) {
-
-        Type listType = new TypeToken<ArrayList<NH_ReadingList>>() {
-        }.getType();
-
-        return new Gson().fromJson(str, listType);
-    }
-
-    public static List<NH_ReadingList> arrayNH_ReadingListFromData(String str, String key) {
-
-        try {
-            JSONObject jsonObject = new JSONObject(str);
-            Type listType = new TypeToken<ArrayList<NH_ReadingList>>() {
-            }.getType();
-
-            return new Gson().fromJson(jsonObject.getString(str), listType);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList();
-
-
-    }
 
     public int getRes() {
         return res;
@@ -163,49 +142,6 @@ public class NH_ReadingList {
         private AnswererBean answerer;
         private List<?> serial_list;
 
-        public static DataBean objectFromData(String str) {
-
-            return new Gson().fromJson(str, DataBean.class);
-        }
-
-        public static DataBean objectFromData(String str, String key) {
-
-            try {
-                JSONObject jsonObject = new JSONObject(str);
-
-                return new Gson().fromJson(jsonObject.getString(str), DataBean.class);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        public static List<DataBean> arrayDataBeanFromData(String str) {
-
-            Type listType = new TypeToken<ArrayList<DataBean>>() {
-            }.getType();
-
-            return new Gson().fromJson(str, listType);
-        }
-
-        public static List<DataBean> arrayDataBeanFromData(String str, String key) {
-
-            try {
-                JSONObject jsonObject = new JSONObject(str);
-                Type listType = new TypeToken<ArrayList<DataBean>>() {
-                }.getType();
-
-                return new Gson().fromJson(jsonObject.getString(str), listType);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return new ArrayList();
-
-
-        }
 
         public String getId() {
             return id;
@@ -526,50 +462,6 @@ public class NH_ReadingList {
             private String fans_total;
             private String web_url;
 
-            public static AuthorBean objectFromData(String str) {
-
-                return new Gson().fromJson(str, AuthorBean.class);
-            }
-
-            public static AuthorBean objectFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-
-                    return new Gson().fromJson(jsonObject.getString(str), AuthorBean.class);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            public static List<AuthorBean> arrayAuthorBeanFromData(String str) {
-
-                Type listType = new TypeToken<ArrayList<AuthorBean>>() {
-                }.getType();
-
-                return new Gson().fromJson(str, listType);
-            }
-
-            public static List<AuthorBean> arrayAuthorBeanFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-                    Type listType = new TypeToken<ArrayList<AuthorBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(jsonObject.getString(str), listType);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return new ArrayList();
-
-
-            }
-
             public String getUser_id() {
                 return user_id;
             }
@@ -656,50 +548,6 @@ public class NH_ReadingList {
             private String title;
             private String content;
 
-            public static ShareInfoBean objectFromData(String str) {
-
-                return new Gson().fromJson(str, ShareInfoBean.class);
-            }
-
-            public static ShareInfoBean objectFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-
-                    return new Gson().fromJson(jsonObject.getString(str), ShareInfoBean.class);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            public static List<ShareInfoBean> arrayShareInfoBeanFromData(String str) {
-
-                Type listType = new TypeToken<ArrayList<ShareInfoBean>>() {
-                }.getType();
-
-                return new Gson().fromJson(str, listType);
-            }
-
-            public static List<ShareInfoBean> arrayShareInfoBeanFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-                    Type listType = new TypeToken<ArrayList<ShareInfoBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(jsonObject.getString(str), listType);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return new ArrayList();
-
-
-            }
-
             public String getUrl() {
                 return url;
             }
@@ -756,49 +604,6 @@ public class NH_ReadingList {
             private String fans_total;
             private String web_url;
 
-            public static AnswererBean objectFromData(String str) {
-
-                return new Gson().fromJson(str, AnswererBean.class);
-            }
-
-            public static AnswererBean objectFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-
-                    return new Gson().fromJson(jsonObject.getString(str), AnswererBean.class);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            public static List<AnswererBean> arrayAnswererBeanFromData(String str) {
-
-                Type listType = new TypeToken<ArrayList<AnswererBean>>() {
-                }.getType();
-
-                return new Gson().fromJson(str, listType);
-            }
-
-            public static List<AnswererBean> arrayAnswererBeanFromData(String str, String key) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(str);
-                    Type listType = new TypeToken<ArrayList<AnswererBean>>() {
-                    }.getType();
-
-                    return new Gson().fromJson(jsonObject.getString(str), listType);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return new ArrayList();
-
-
-            }
 
             public String getUser_id() {
                 return user_id;

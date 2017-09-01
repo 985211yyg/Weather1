@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -210,7 +211,7 @@ public class NH_DataBean {
             }
         }
 
-        public static class ContentListBean implements MultiItemEntity{
+        public static class ContentListBean implements MultiItemEntity,Serializable{
             public static final int PIC = 0;
             //阅读
             public static final int ONE_WEEK = 1;

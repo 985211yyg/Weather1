@@ -1,6 +1,7 @@
 package com.example.yungui.weather.utils;
 
 import com.example.yungui.weather.App;
+import com.example.yungui.weather.http.api.Api;
 
 /**
  * Created by yungui on 2017/6/18.
@@ -52,9 +53,9 @@ public class SettingUtil {
      将weatherKey存储在sharepreference中
       */
     public static String getWeatherKey() {
-        return "36af2fa44706456c998958d1f11a64bf";
+        return Api.WEATHER_KEY;
 
-//        return (String) SPUtil.get(App.getContext(), WEATHER_KEY, "");
+//        return (String) SPUtil.get(App.getContext(), WEATHER_KEY, "36af2fa44706456c998958d1f11a64bf");
     }
 
     public static void setWeatherKey(String key) {

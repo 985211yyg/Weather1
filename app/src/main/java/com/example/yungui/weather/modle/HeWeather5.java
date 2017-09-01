@@ -81,6 +81,7 @@ public class HeWeather5 implements Serializable, Cloneable, MultiItemEntity {
      * wind : {"deg":"280","dir":"西风","sc":"3-4","spd":"11"}
      */
 
+     //未来的天气预报
     private List<DailyForecastBean> daily_forecast;
     /**
      * cond : {"code":"305","txt":"小雨"}
@@ -825,6 +826,23 @@ public class HeWeather5 implements Serializable, Cloneable, MultiItemEntity {
 
         private WindBean wind;
 
+        @Override
+        public String toString() {
+            return "DailyForecastBean{" +
+                    "astro=" + astro +
+                    ", cond=" + cond +
+                    ", date='" + date + '\'' +
+                    ", hum='" + hum + '\'' +
+                    ", pcpn='" + pcpn + '\'' +
+                    ", pop='" + pop + '\'' +
+                    ", pres='" + pres + '\'' +
+                    ", tmp=" + tmp +
+                    ", uv='" + uv + '\'' +
+                    ", vis='" + vis + '\'' +
+                    ", wind=" + wind +
+                    '}';
+        }
+
         public AstroBean getAstro() {
             return astro;
         }
@@ -1204,5 +1222,19 @@ public class HeWeather5 implements Serializable, Cloneable, MultiItemEntity {
             e.printStackTrace();
         }
         return o;
+    }
+
+    @Override
+    public String toString() {
+        return "HeWeather5{" +
+                "itemType=" + itemType +
+                ", aqi=" + aqi +
+                ", basic=" + basic +
+                ", now=" + now +
+                ", status='" + status + '\'' +
+                ", suggestion=" + suggestion +
+                ", daily_forecast=" + daily_forecast +
+                ", hourly_forecast=" + hourly_forecast +
+                '}';
     }
 }

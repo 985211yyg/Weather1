@@ -2,22 +2,23 @@ package com.example.yungui.weather.ui.nh;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.blankj.utilcode.util.ScreenUtils;
-import com.example.yungui.weather.AppGlobal;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.http.ApiFactory;
 import com.example.yungui.weather.modle.nh.NH_IDList;
 import com.example.yungui.weather.ui.MainActivity;
 import com.example.yungui.weather.ui.base.BaseFragment;
 import com.example.yungui.weather.ui.nh.adapter.NHViewPagerAdapter;
+import com.example.yungui.weather.ui.nh.fragment.BottomSheetDialogFragment;
+import com.example.yungui.weather.ui.nh.fragment.NHFirstFragment;
+import com.example.yungui.weather.ui.nh.fragment.NHMovieFragment;
+import com.example.yungui.weather.ui.nh.fragment.NHMusicFragment;
+import com.example.yungui.weather.ui.nh.fragment.NHReadFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ import rx.schedulers.Schedulers;
 
 public class NHfragment extends BaseFragment implements
         BottomNavigationView.OnNavigationItemSelectedListener,
-        ItemListDialogFragment.Listener, ViewPager.OnPageChangeListener {
+        BottomSheetDialogFragment.Listener, ViewPager.OnPageChangeListener {
     private android.support.v7.widget.Toolbar toolbar;
     private BottomNavigationView navigation;
     private ViewPager viewPager;
@@ -69,6 +70,7 @@ public class NHfragment extends BaseFragment implements
     protected void initView() {
         toolbar = findView(R.id.toolbar);
         ((MainActivity) getActivity()).initToolbar(toolbar);
+
         viewPager = findView(R.id.nh_viewPager);
         viewPagerAdapter = new NHViewPagerAdapter(getFragmentManager());
         navigation = findView(R.id.navigation);
@@ -77,8 +79,9 @@ public class NHfragment extends BaseFragment implements
         viewPager.setOffscreenPageLimit(3);
         viewPagerAdapter.addFragment(NHFirstFragment.newInstance(null), null);
         viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
-        viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
-        viewPagerAdapter.addFragment(NHReadFragment.newInstance(null, null), null);
+        viewPagerAdapter.addFragment(NHMusicFragment.newInstance(null, null), null);
+        viewPagerAdapter.addFragment(NHMovieFragment.newInstance(null, null), null);
+
         viewPager.setAdapter(viewPagerAdapter);
 
     }
@@ -121,17 +124,14 @@ public class NHfragment extends BaseFragment implements
 
             case R.id.navigation_read:
                 viewPager.setCurrentItem(1);
-
                 return true;
 
             case R.id.navigation_music:
                 viewPager.setCurrentItem(2);
-
-
                 return true;
+
             case R.id.navigation_video:
                 viewPager.setCurrentItem(3);
-
                 return true;
 
         }

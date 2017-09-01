@@ -56,7 +56,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.e(TAG, "onAttach: " );
+//        Log.e(TAG, "onAttach: " );
         mContext = context;
     }
 
@@ -64,7 +64,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Log.e(TAG, "onCreate: " );
+//        Log.e(TAG, "onCreate: " );
     }
 
     /**
@@ -78,7 +78,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.e(TAG, "onCreateView: " );
+//        Log.e(TAG, "onCreateView: " );
         rootView = inflater.inflate(getLayoutID(), container, false);
         initView();
         return rootView;
@@ -87,7 +87,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.e(TAG, "onViewCreated: " );
+//        Log.e(TAG, "onViewCreated: " );
         /*
        视图加载完毕时进行判断加载
          */
@@ -100,7 +100,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e(TAG, "onActivityCreated: " );
+//        Log.e(TAG, "onActivityCreated: " );
     }
 
     @Override
@@ -121,7 +121,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e(TAG, "setUserVisibleHint: "+isVisibleToUser );
+//        Log.e(TAG, "setUserVisibleHint: "+isVisibleToUser );
         if (isVisibleToUser) {
             lazyFetchDataIfPrepared();
         }
@@ -131,31 +131,31 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.e(TAG, "onStart: " );
+//        Log.e(TAG, "onStart: " );
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.e(TAG, "onResume: " );
+//        Log.e(TAG, "onResume: " );
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.e(TAG, "onPause: " );
+//        Log.e(TAG, "onPause: " );
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.e(TAG, "onSaveInstanceState: 0" );
+//        Log.e(TAG, "onSaveInstanceState: 0" );
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.e(TAG, "onStop: " );
+//        Log.e(TAG, "onStop: " );
     }
 
     /**
@@ -164,7 +164,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.e(TAG, "onDestroyView: " );
+//        Log.e(TAG, "onDestroyView: " );
         //销毁后重置懒加载
         hasFetchData = false;
         isViewPrepared = false;
@@ -173,7 +173,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.e(TAG, "onDestroy: " );
+//        Log.e(TAG, "onDestroy: " );
     }
 
 
@@ -181,7 +181,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.e(TAG, "onDetach: " );
+//        Log.e(TAG, "onDetach: " );
     }
 
     /*

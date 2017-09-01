@@ -6,7 +6,7 @@
     </style>
 
     <style name="myActivityOutEnterAnima" parent="@android:style/Animation.Activity">
-        <!-- 定义activity的进出场动画  A-->B  B->A   -->
+        <!-- 定义activity的进出场动画  A-->B B->A -->
         <!--B进-->
         <item name="android:activityOpenEnterAnimation">@anim/enter_from_right</item>
         <!--A出-->
@@ -96,6 +96,7 @@
     <style name="SearchTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/MySearchActivityAnim</item>
     </style>
+
     <style name="MySearchActivityAnim" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/enter_from_bottom</item>
     </style>

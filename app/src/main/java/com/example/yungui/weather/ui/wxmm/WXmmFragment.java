@@ -10,8 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -23,13 +21,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.ConvertUtils;
-import com.blankj.utilcode.util.ScreenUtils;
 import com.example.circleindicator.CircleIndicator;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.http.api.Api;
 import com.example.yungui.weather.ui.JavaScriptInteraction.JSInject;
-import com.example.yungui.weather.ui.JavaScriptInteraction.JSInterface;
+import com.example.yungui.weather.ui.JavaScriptInteraction.JSInterfaceHelper;
 import com.example.yungui.weather.ui.MainActivity;
 import com.example.yungui.weather.ui.base.BaseFragment;
 import com.example.yungui.weather.ui.wxmm.adapter.BannerAdapter;
@@ -57,7 +53,7 @@ import rx.schedulers.Schedulers;
  * Created by yungui on 2017/6/19.
  */
 
-public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterface {
+public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJSInterface {
     private Toolbar toolbar;
     private BannerAdapter bannerAdapter;
     private CircleIndicator circleIndicator;
@@ -129,15 +125,15 @@ public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterf
         preWebViewSetting.setUseWideViewPort(true);
         preWebViewSetting.setJavaScriptEnabled(true);
 
-        preWebView.addJavascriptInterface(new JSInterface(this), "local_obj");
-        preWebView.addJavascriptInterface(new JSInterface(this), "imageListener");
+        preWebView.addJavascriptInterface(new JSInterfaceHelper(this), "local_obj");
+        preWebView.addJavascriptInterface(new JSInterfaceHelper(this), "imageListener");
 
         //注入HTML获取去js
-        webView.addJavascriptInterface(new JSInterface(this), "local_obj");
+        webView.addJavascriptInterface(new JSInterfaceHelper(this), "local_obj");
         //注入item点击监听js
-        webView.addJavascriptInterface(new JSInterface(this), "itemListener");
+        webView.addJavascriptInterface(new JSInterfaceHelper(this), "itemListener");
         //注入图片店家监听js
-        webView.addJavascriptInterface(new JSInterface(this), "imageListener");
+        webView.addJavascriptInterface(new JSInterfaceHelper(this), "imageListener");
 
         //回调事件
         webView.setWebViewClient(new WebViewClient() {
@@ -388,8 +384,19 @@ public class WXmmFragment extends BaseFragment implements JSInterface.OnJSInterf
     }
 
     @Override
+    public void getAllImages(List<String> imageList) {
+
+    }
+
+
+    @Override
     public void showToast() {
         Log.e(TAG, ">>>>>>>showToast: ");
+    }
+
+    @Override
+    public void getTextContent(String content) {
+
     }
 
     /**

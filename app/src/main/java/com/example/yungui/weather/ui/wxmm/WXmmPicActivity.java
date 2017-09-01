@@ -2,6 +2,7 @@ package com.example.yungui.weather.ui.wxmm;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class WXmmPicActivity extends BasePicActivity {
     protected void initView(Bundle savedInstanceState) {
         position = getIntent().getIntExtra("position", 0);
         imgUrls = getIntent().getStringArrayListExtra("imgs");
+        Log.e("imgUrls", "接受的图片: "+imgUrls);
 
         save = (Button) findViewById(R.id.mm_save);
         count = (TextView) findViewById(R.id.mm_count);

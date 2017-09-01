@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.baidu.location.BDLocation;
-import com.example.yungui.weather.modle.HeWeather5;
+import com.amap.api.location.AMapLocation;
+import com.example.yungui.weather.Listener.AMapLocationListener;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
 import rx.functions.Func1;
+import rx.observables.SyncOnSubscribe;
 
 
 /**
@@ -29,35 +32,23 @@ public class RxLocation {
 
     //返回实例
     public static RxLocation getInstance() {
+        Log.e(TAG, "getInstance: RxLocation");
         return instance;
     }
 
-    public Observable<BDLocation> locate(final Activity context) {
-        //请求权限
-        return new RxPermissions(context)
-                .request(Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.READ_PHONE_STATE)
-                .flatMap(new Func1<Boolean, Observable<BDLocation>>() {
-                    //权限请求成功的话
-                    @Override
-                    public Observable<BDLocation> call(Boolean aBoolean) {
-                        if (aBoolean) {
-                            Log.e(TAG, "请求权限成功");
-                            return Observable
-                                    .unsafeCreate(new LocationOnSubscribe(context));
-                        }
-                        return null;
-                    }
-                });
-    }
+    public Observable<AMapLocation> locate(final Activity context) {
+        Log.e(TAG, "locate: ");
+        return Observable.unsafeCreate(new LocationObservable_OnSubscribe(context));
 
+    }
     /**
      * 获取上次定位过的位置
+     *
      * @param context
      * @return
      */
-    public Observable<BDLocation> locateLastKnown(Context context) {
-        return Observable.unsafeCreate(new LocationLastKnownOnSubscribe(context));
+    public Observable<AMapLocation> locateLastKnown(Context context) {
+
+        return Observable.unsafeCreate(new LocationLastKnownObservable_OnSubscribe(context));
     }
 }

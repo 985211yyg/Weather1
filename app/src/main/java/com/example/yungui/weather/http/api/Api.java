@@ -5,6 +5,13 @@ package com.example.yungui.weather.http.api;
  */
 
 public class Api {
+    //天气key
+    public static final String WEATHER_KEY = "36af2fa44706456c998958d1f11a64bf";
+    //定位key
+    public static final String LOCATION_KEY = "db8e3e6ee731d6338bcf13f459e2d0fe";
+    //天气
+    public static final String WEATHER = "https://free-api.heweather.com/v5/weather?city=yourcity&key=36af2fa44706456c998958d1f11a64bf";
+
     //每日推荐
     public static final String DAILY = "http://baobab.wandoujia.com/api/v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83";
     //发现更多
@@ -71,7 +78,7 @@ public class Api {
     public static final String MOVIELIST = "http://v3.wufazhuce.com:8000/api/channel/movie/more/0?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
     //影视详细信息 http://v3.wufazhuce.com:8000/api/movie/detail/ + item_id + ?channel=wdj&source=channel_movie&source_id=9240&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android
     // 根据获取最movielis中的item_id
-    public static final String Movie = "http://v3.wufazhuce.com:8000/api/movie/detail/ + item_id + ?channel=wdj&source=channel_movie&source_id=9240&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
+    public static final String Movie = "http://v3.wufazhuce.com:8000/api/movie/detail/item_id?channel=wdj&source=channel_movie&source_id=9240&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
     //更多影视
     // 根据获取最movielis中的id来替换
     public static final String MORE_MOVIE = "http://v3.wufazhuce.com:8000/api/channel/movie/more/ + id + ?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
@@ -92,4 +99,12 @@ public class Api {
      */
     public static final String ARTICLE = "http://v3.wufazhuce.com:8000/api/essay/ + item_id + ?channel=wdj&source=channel_reading&source_id=9264&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
     public static final String QA = "http://v3.wufazhuce.com:8000/api/question/ + item_id + ?channel=wdj&source=channel_reading&source_id=9254&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
+
+    /**
+     * 获取特定日期的 one 信息
+     * <p>
+     * 首页：http://v3.wufazhuce.com:8000/api/hp/bymonth/ + yyyy-MM-dd + %2000:00:00?
+     * channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android
+     */
+    public static final String One_Day = "http://v3.wufazhuce.com:8000/api/hp/bymonth/ + yyyy-MM-dd + %2000:00:00?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
 }
