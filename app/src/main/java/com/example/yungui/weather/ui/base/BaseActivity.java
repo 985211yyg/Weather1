@@ -2,6 +2,8 @@ package com.example.yungui.weather.ui.base;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.LayoutRes;
@@ -12,6 +14,7 @@ import android.support.v13.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -154,37 +157,52 @@ public abstract class BaseActivity extends AppCompatActivity {
         switch (themeIndex) {
             case 0:
                 setTheme(R.style.BlueTheme);
-
+                refreshStatusBar();
                 break;
             case 1:
                 setTheme(R.style.GreenTheme);
+                refreshStatusBar();
 
                 break;
             case 2:
                 setTheme(R.style.NiagaraTheme);
-
-
+                refreshStatusBar();
                 break;
             case 3:
                 setTheme(R.style.PinkTheme);
+                refreshStatusBar();
 
                 break;
             case 4:
                 setTheme(R.style.PurpleTheme);
+                refreshStatusBar();
 
 
                 break;
             case 5:
                 setTheme(R.style.RedTheme);
+                refreshStatusBar();
 
 
                 break;
             case 6:
                 setTheme(R.style.MyTheme);
-
+                refreshStatusBar();
 
         }
 
+    }
+
+    /**
+     * 刷新 StatusBar
+     */
+    private void refreshStatusBar() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            TypedValue typedValue = new TypedValue();
+            Resources.Theme theme = getTheme();
+            theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+            getWindow().setStatusBarColor(getResources().getColor(typedValue.resourceId));
+        }
     }
 
     /*

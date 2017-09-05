@@ -34,7 +34,8 @@ import org.greenrobot.eventbus.ThreadMode;
  * https://github.com/afollestad/material-dialogs.git
  */
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BottomSheetDialogFragment.Listener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        BottomSheetDialogFragment.Listener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;

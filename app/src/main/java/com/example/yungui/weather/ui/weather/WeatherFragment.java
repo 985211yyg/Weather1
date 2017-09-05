@@ -147,7 +147,7 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
 
         //分别从缓存和网络中获取数据，
         subscription = Observable
-                .concat(getLocalCache(), getFromNetWork())
+                .concat(getLocalCache(),getFromNetWork())
                 .first()
                 //在主线程中更新
                 .observeOn(AndroidSchedulers.mainThread())
