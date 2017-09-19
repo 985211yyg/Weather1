@@ -35,6 +35,7 @@ import rx.schedulers.Schedulers;
 public class NHfragment extends BaseFragment implements
         BottomNavigationView.OnNavigationItemSelectedListener,
         BottomSheetDialogFragment.Listener, ViewPager.OnPageChangeListener {
+
     private android.support.v7.widget.Toolbar toolbar;
     private BottomNavigationView navigation;
     private ViewPager viewPager;
@@ -56,15 +57,6 @@ public class NHfragment extends BaseFragment implements
         return R.layout.fragment_nh;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     protected void initView() {

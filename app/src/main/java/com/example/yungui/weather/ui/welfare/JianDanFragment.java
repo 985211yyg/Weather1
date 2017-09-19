@@ -84,13 +84,5 @@ public class JianDanFragment extends BaseGirlsListFragment {
 
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
 
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 }

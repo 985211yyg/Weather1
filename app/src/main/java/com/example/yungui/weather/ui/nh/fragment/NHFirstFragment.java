@@ -9,7 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.http.ApiFactory;
@@ -36,11 +39,16 @@ public class NHFirstFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
     private FirstRecyclerViewAdapter firstRecyclerViewAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
     private Subscription subscription, subscription1;
     private List<String> idList = new ArrayList<>();
     private List<NH_DataBean.DataBean.ContentListBean> contentListBeans = new ArrayList<>();
     private int initLoadCount = 2;
+
+    private TextView suspensionBar;
+    private int suspensionHeight;
+    private int currentPosition;
 
     public NHFirstFragment() {
 
@@ -66,15 +74,6 @@ public class NHFirstFragment extends BaseFragment {
         return R.layout.fragment_nh_first;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     protected void initView() {
@@ -82,9 +81,12 @@ public class NHFirstFragment extends BaseFragment {
         toolbar.setTitle("one");
         ((MainActivity) getActivity()).initToolbar(toolbar);
 
+        suspensionBar = findView(R.id.suspensionBar);
+
         refreshLayout = findView(R.id.first_refresh);
         recyclerView = findView(R.id.first_recycleView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        linearLayoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(linearLayoutManager);
         firstRecyclerViewAdapter = new FirstRecyclerViewAdapter(null);
         recyclerView.setAdapter(firstRecyclerViewAdapter);
         firstRecyclerViewAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -98,7 +100,7 @@ public class NHFirstFragment extends BaseFragment {
                 intent.putExtra("author", ((NH_DataBean.DataBean.ContentListBean) adapter.getData().get(position)).getAuthor().getUser_name());
                 intent.putExtra("publishTime", ((NH_DataBean.DataBean.ContentListBean) adapter.getData().get(position)).getPost_date());
                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(),
-                        view.findViewById(R.id.img),"shareImg").toBundle());
+                        view.findViewById(R.id.img), "shareImg").toBundle());
 //                startActivity(intent);
             }
         });
@@ -108,6 +110,63 @@ public class NHFirstFragment extends BaseFragment {
                 refreshLayout.setRefreshing(false);
             }
         });
+
+        //添加滚动监听
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                suspensionHeight = suspensionBar.getHeight();
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentPosition = linearLayoutManager.findFirstVisibleItemPosition();
+                //获取第一个可见的item的下一个item
+                View view = linearLayoutManager.findViewByPosition(currentPosition + 1);
+                if (view != null) {
+                    //当item的顶部滚动到悬浮栏的底部时候
+                    if (view.getTop() <= suspensionHeight) {
+                        //设置悬浮栏的向上偏移
+                        suspensionBar.setY(-(suspensionHeight - view.getTop()));
+                    } else {
+                        //还原悬浮蓝
+                        suspensionBar.setY(0);
+                        updateSuspensionBar(currentPosition);
+                    }
+                }
+
+//                //当悬浮蓝被完全顶出屏幕的时候重置悬浮蓝的位置同时更新悬浮蓝的
+//                if (currentPosition != linearLayoutManager.findFirstVisibleItemPosition()) {
+//                    suspensionBar.setY(0);
+//
+//                    currentPosition = linearLayoutManager.findFirstVisibleItemPosition();
+//                }
+            }
+        });
+    }
+
+    private void updateSuspensionBar(int position) {
+        Log.e(TAG, "updateSuspensionBar: "+position );
+        int type = firstRecyclerViewAdapter.getItem(position).getCategory();
+        switch (type) {
+            case 0:
+                suspensionBar.setText("- 摄影 -");
+                break;
+            case 1:
+            case 2:
+            case 3:
+                suspensionBar.setText("- 阅读 -");
+                break;
+            case 4:
+                suspensionBar.setText("- 音乐 -");
+                break;
+            case 5:
+                suspensionBar.setText("- 电影 -");
+                break;
+        }
+
     }
 
     @Override
@@ -142,6 +201,7 @@ public class NHFirstFragment extends BaseFragment {
                                         @Override
                                         public void onCompleted() {
                                             Log.e(TAG, "onCompleted: ");
+                                            suspensionBar.setVisibility(View.VISIBLE);
                                             refreshLayout.setRefreshing(false);
 
                                         }

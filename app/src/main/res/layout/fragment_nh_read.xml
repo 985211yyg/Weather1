@@ -40,10 +40,9 @@
                 android:id="@+id/read_recycleView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"
                 android:scrollbarFadeDuration="500"
-                android:scrollbarSize="@dimen/dp_10">
-            </android.support.v7.widget.RecyclerView>
+                android:scrollbarSize="@dimen/dp_10"
+                android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 

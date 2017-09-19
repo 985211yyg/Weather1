@@ -16,11 +16,10 @@
         app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/weather_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/menu"
-            app:theme="@style/AppTheme.PopupOverlay"
             app:title="天气"
             app:titleTextColor="@android:color/white" />
 
@@ -132,12 +131,6 @@
                         android:id="@+id/daily_forecast"
                         android:layout_width="match_parent"
                         android:layout_height="110dp" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray"
-                        android:layout_marginBottom="@dimen/dp_10"/>
-
                     <LinearLayout
                         android:id="@+id/hourly_forecast"
                         android:layout_width="match_parent"
@@ -147,11 +140,6 @@
                         android:orientation="vertical">
                     </LinearLayout>
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_margin="@dimen/dp_4"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/forecast_recyclerView"

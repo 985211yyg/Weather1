@@ -3,8 +3,10 @@ package com.example.yungui.weather.location;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
+import com.example.yungui.weather.App;
 import com.example.yungui.weather.Listener.AMapLocationListener;
 
 import rx.Observable;

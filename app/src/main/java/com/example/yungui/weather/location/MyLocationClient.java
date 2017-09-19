@@ -2,11 +2,13 @@ package com.example.yungui.weather.location;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.example.yungui.weather.App;
 
 /**
  * Created by yungui on 2017/6/22.
@@ -30,13 +32,13 @@ public class MyLocationClient {
         //配置参数
         clientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//高精度定位
         //使用单次定位，省电
-        clientOption.setOnceLocation(true);
+//        clientOption.setOnceLocation(true);
         //获取最近3s内精度最高的定位
         clientOption.setOnceLocationLatest(true);
         //设置返回地址描述
         clientOption.setNeedAddress(true);
-        //设置定位超时时间 30S
-        clientOption.setHttpTimeOut(30000);
+        //设置定位超时时间 3S
+        clientOption.setHttpTimeOut(3000);
         //开启定位缓存,缓存网络定位
         clientOption.setLocationCacheEnable(true);
         //设置参数
@@ -66,7 +68,6 @@ public class MyLocationClient {
         realLocationClient.setLocationListener(new AMapLocationListener() {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
-
                 if (aMapLocation != null) {
                     if (aMapLocation.getErrorCode() == 0) {
                         //可在其中解析amapLocation获取相应内容。

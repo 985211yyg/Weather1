@@ -41,15 +41,6 @@ public class PlaceholderFragment extends BaseFragment implements DragPhotoView.O
         return R.layout.fragment_pic_detail;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     protected void initView() {

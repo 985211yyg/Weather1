@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.yungui.weather.R;
+
 /**
  * 根据fragment的可见性以及视图的加载 判断加载数据的时机，
  * 同时对布局以及视图的初始化进行封装，暴露出findview()
@@ -39,12 +41,6 @@ public abstract class BaseFragment extends Fragment {
     @LayoutRes
     int getLayoutID();
 
-    //获取menu ID
-    protected abstract
-    @MenuRes
-    int getMenuID();
-
-    protected abstract void onMenuItemClick(int id);
     //抽象的视图加载方法
     protected abstract void initView();
 
@@ -56,7 +52,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        Log.e(TAG, "onAttach: " );
+        Log.e(TAG, "onAttach: " );
         mContext = context;
     }
 
@@ -64,7 +60,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-//        Log.e(TAG, "onCreate: " );
+        Log.e(TAG, "onCreate: " );
     }
 
     /**
@@ -78,7 +74,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        Log.e(TAG, "onCreateView: " );
+        Log.e(TAG, "onCreateView: " );
         rootView = inflater.inflate(getLayoutID(), container, false);
         initView();
         return rootView;
@@ -87,10 +83,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        Log.e(TAG, "onViewCreated: " );
-        /*
-       视图加载完毕时进行判断加载
-         */
+        Log.e(TAG, "onViewCreated: " );
+        //视图加载完毕
         isViewPrepared = true;
         //判断是否记载过数据
         lazyFetchDataIfPrepared();
@@ -100,18 +94,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        Log.e(TAG, "onActivityCreated: " );
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        onMenuItemClick(item.getItemId());
-        return super.onOptionsItemSelected(item);
+        Log.e(TAG, "onActivityCreated: " );
     }
 
     /**

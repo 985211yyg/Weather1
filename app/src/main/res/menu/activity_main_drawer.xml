@@ -20,10 +20,10 @@
             android:id="@+id/nav_movie"
             android:icon="@drawable/movie"
             android:title="开眼" />
-        <item
-            android:id="@+id/nav_welfare"
-            android:icon="@drawable/fuli"
-            android:title="福利" />
+        <!--<item-->
+            <!--android:id="@+id/nav_welfare"-->
+            <!--android:icon="@drawable/fuli"-->
+            <!--android:title="福利" />-->
 
     </group>
 

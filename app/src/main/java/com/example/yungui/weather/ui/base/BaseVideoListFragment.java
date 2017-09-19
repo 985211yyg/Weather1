@@ -13,15 +13,7 @@ public class BaseVideoListFragment extends BaseContentFragment {
         return 0;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
 
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     protected void lazyFetchData() {

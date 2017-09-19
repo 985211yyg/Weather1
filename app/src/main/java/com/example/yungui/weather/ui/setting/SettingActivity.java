@@ -1,10 +1,13 @@
 package com.example.yungui.weather.ui.setting;
 
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.TypedValue;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
+import com.example.yungui.weather.App;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.event.ThemeChangeEvent;
 import com.example.yungui.weather.ui.base.BaseActivity;
@@ -25,7 +28,7 @@ public class SettingActivity extends BaseActivity implements ColorChooserDialog.
 
     @Override
     protected int getMenuId() {
-        return 0;
+        return R.menu.main;
     }
 
     @Override
@@ -36,7 +39,6 @@ public class SettingActivity extends BaseActivity implements ColorChooserDialog.
     @Override
     protected void initView(Bundle savedInstanceState) {
         setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
@@ -80,6 +82,16 @@ public class SettingActivity extends BaseActivity implements ColorChooserDialog.
         } else if (selectedColor == getResources().getColor(R.color.colorPrimary)) {
             setTheme(R.style.MyTheme);
             SettingUtil.setTheme(6);
+        } else {
+            //自定义的主题颜色
+////            SettingUtil.setTheme(7);
+//            TypedValue colorPrimary = new TypedValue();
+//            TypedValue colorPrimaryDark = new TypedValue();
+//            TypedValue colorAccent = new TypedValue();
+//            Resources.Theme theme = getTheme();
+//            theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true);
+
+
         }
         this.recreate();
         //发送事件

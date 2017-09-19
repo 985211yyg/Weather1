@@ -55,15 +55,6 @@ public class WxmmBannerItemFragment extends BaseFragment {
         return 0;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     protected void initView() {

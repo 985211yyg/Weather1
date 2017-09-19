@@ -1,6 +1,6 @@
 package com.example.yungui.weather.ui.weather;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
@@ -16,9 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -28,6 +26,7 @@ import com.example.yungui.weather.http.ApiFactory;
 import com.example.yungui.weather.http.response.BaseWeatherResponse;
 import com.example.yungui.weather.location.RxLocation;
 import com.example.yungui.weather.modle.HeWeather5;
+import com.example.yungui.weather.tts.TTS;
 import com.example.yungui.weather.ui.MainActivity;
 import com.example.yungui.weather.ui.base.BaseFragment;
 import com.example.yungui.weather.ui.weather.adapter.DailyForecastAdapter;
@@ -55,7 +54,8 @@ import rx.schedulers.Schedulers;
  * Created by yungui on 2017/6/19.
  */
 
-public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
+        Toolbar.OnMenuItemClickListener {
     public static final String CACHE_WEATHER = "weather_cache";
     private Toolbar toolbar;
     private TextView city, weather, temp, time, aqi;
@@ -72,6 +72,9 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
     private DailyForecastAdapter dailyForecastAdapter;
     private SwipeRefreshLayout refreshLayout;
 
+    private TTS tts;
+    private StringBuilder stringBuilder;
+
     public static final String TAG = WeatherFragment.class.getName();
 
     @Override
@@ -80,21 +83,17 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
         return R.layout.fragment_weather;
     }
 
-    @Override
-    protected int getMenuID() {
-        return R.menu.weather;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
-        toolbar = findView(R.id.toolbar);
+        toolbar = findView(R.id.weather_toolbar);
         ((MainActivity) getActivity()).initToolbar(toolbar);
+        toolbar.inflateMenu(R.menu.weather);
+        toolbar.setOnMenuItemClickListener(this);
+        tts = TTS.getInstance(mContext);
+        stringBuilder = new StringBuilder();
+
+        //获取缓存
         cache = ACache.get(getActivity());
 
         city = findView(R.id.tv_city);
@@ -106,6 +105,7 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
         refreshLayout = findView(R.id.refreshLayout);
         //设置刷新控件的颜色和当前的主题颜色一样
         refreshLayout.setColorSchemeColors(ThemeUtil.getCurrentColorPrimary(getContext()));
+        refreshLayout.setOnRefreshListener(this);
         rvSuggestion = findView(R.id.forecast_recyclerView);
 
         dailyForecast = findView(R.id.daily_forecast);
@@ -174,7 +174,6 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
                         }).show();
 
                     }
-
                     @Override
                     public void onNext(HeWeather5 heWeather5) {
                         showWeather(heWeather5);
@@ -183,6 +182,16 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main,menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * 从网络中获取数据
@@ -196,16 +205,16 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
                 .flatMap(new Func1<AMapLocation, Observable<BaseWeatherResponse<HeWeather5>>>() {
                     @Override
                     public Observable<BaseWeatherResponse<HeWeather5>> call(AMapLocation aMapLocation) {
-                        Log.e(TAG, "call: " + aMapLocation.toStr());
-                        final String city = TextUtils.isEmpty(aMapLocation.getCity()) ?
+                        Log.e(TAG, "call: "+aMapLocation.getCity());
+                        String city = TextUtils.isEmpty(aMapLocation.getCity()) ?
                                 "昆明" : aMapLocation.getCity().replace("市", "");
-
                         return WeatherUtil
                                 .getInstance()
                                 .getWeatherKey()
                                 .flatMap(new Func1<String, Observable<BaseWeatherResponse<HeWeather5>>>() {
                                     @Override
                                     public Observable<BaseWeatherResponse<HeWeather5>> call(String key) {
+                                        Log.e(TAG, "call: key"+key );
                                         return ApiFactory
                                                 .getWeatherController()
                                                 .getWeather(key, city)
@@ -256,7 +265,12 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
         String updateTime = TimeUtils.string2String(heWeather5.getBasic().getUpdate().getLoc(),
                 new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()),
                 new SimpleDateFormat("hh:mm", Locale.getDefault()));
-        time.setText("截至 " + updateTime);
+        time.setText("截至 " + updateTime); 
+        stringBuilder.append("截至北京时间:" + updateTime);
+        stringBuilder.append(heWeather5.getBasic().getCity());
+        stringBuilder.append("\n天气  "+heWeather5.getNow().getCond().getTxt());
+        stringBuilder.append("\n温度  " + heWeather5.getNow().getTmp() + "摄氏度");
+        stringBuilder.append("\n空气质量  " + heWeather5.getAqi().getCity().getQlty());
 
         List<Object> suggestion = new ArrayList<>();
         suggestion.add(heWeather5.getSuggestion().getComf());
@@ -268,7 +282,6 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
         suggestion.add(heWeather5.getSuggestion().getTrav());
         suggestion.add(heWeather5.getSuggestion().getUv());
 
-
         //去除空元素
         for (int i = 0; i < suggestion.size(); i++) {
             if (suggestion.get(i) == null) {
@@ -276,12 +289,12 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
             }
         }
         suggestionAdapter.setNewData(suggestion);
+
         if (heWeather5.getDaily_forecast().size() != 0) {
             dailyForecastAdapter.addData(heWeather5.getDaily_forecast());
             dailyForecastAdapter.notifyDataSetChanged();
         }
 
-        Log.e(TAG, "getDaily_forecast: " + heWeather5.getHourly_forecast().size());
         hourlyForecastRelativeLayout.removeAllViews();
         hourlyForecastRelativeLayout.addView(getChartView(heWeather5));
     }
@@ -292,6 +305,12 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
         return chartView;
     }
 
+
+    @Override
+    public void onRefresh() {
+        refreshLayout.setRefreshing(false);
+
+    }
 
     public void setRefresh(boolean refreshing) {
         refreshLayout.post(new Runnable() {
@@ -304,26 +323,20 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
     }
 
     @Override
-    public void onRefresh() {
-        setRefresh(false);
-//        lazyFetchData();
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.toolbar_menu, menu);
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_tts:
-                break;
-            case R.id.item_share:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onStop() {
+        super.onStop();
+        tts.stop();
     }
 
     @Override
@@ -333,5 +346,31 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
         if (subscription != null && subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
+        tts.stop();
+        tts = null;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.item_tts:
+                if (!TextUtils.isEmpty(stringBuilder)) {
+                    tts.speak(stringBuilder.toString());
+                } else {
+                    tts.speak("内容是空的");
+                }
+                break;
+            case R.id.item_share:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString());
+                intent.setType("text/plain");
+                startActivity(intent);
+                break;
+
+
+        }
+        return false;
     }
 }

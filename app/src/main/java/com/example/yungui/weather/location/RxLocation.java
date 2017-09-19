@@ -4,8 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
+import com.example.yungui.weather.App;
 import com.example.yungui.weather.Listener.AMapLocationListener;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -32,14 +34,12 @@ public class RxLocation {
 
     //返回实例
     public static RxLocation getInstance() {
-        Log.e(TAG, "getInstance: RxLocation");
         return instance;
     }
 
     public Observable<AMapLocation> locate(final Activity context) {
-        Log.e(TAG, "locate: ");
+        Log.e(TAG, "locate: " );
         return Observable.unsafeCreate(new LocationObservable_OnSubscribe(context));
-
     }
     /**
      * 获取上次定位过的位置

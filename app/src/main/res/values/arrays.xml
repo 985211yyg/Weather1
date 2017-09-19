@@ -19,14 +19,12 @@
         <item>xiaoli</item>
     </string-array>
     <string-array name="list_preference_refresh_entries">
-        <item>5 秒</item>
-        <item>10 秒</item>
-        <item>30 秒</item>
+        <item>白天模式</item>
+        <item>夜间模式</item>
     </string-array>
     <string-array name="list_preference_refresh_values">
-        <item>5</item>
-        <item>10</item>
-        <item>30</item>
+        <item>day</item>
+        <item>night</item>
     </string-array>
     <string-array name="list_preference_colors_entries">
 

@@ -68,7 +68,7 @@ public class VideoDetailActivity extends BaseActivity {
 
     @Override
     protected int getMenuId() {
-        return 0;
+        return R.menu.main;
     }
 
     @Override
@@ -77,7 +77,9 @@ public class VideoDetailActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        setDisplayHomeAsUpEnabled(true);
         categoryName = getIntent().getStringExtra("name");
+
         searchActionButton = (FloatingActionButton) findViewById(R.id.fab);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.video_detail_swipeRefresh);
         recyclerView = (RecyclerView) findViewById(R.id.video_detail_recycleView);
@@ -85,14 +87,20 @@ public class VideoDetailActivity extends BaseActivity {
         linearLayoutManager = new LinearLayoutManager(VideoDetailActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         videoDetailAdapter = new VideoDetailAdapter(R.layout.fragment_video_item_detail, null);
+//        toolbar.setTitle(categoryName);
         title = (TextView) findViewById(R.id.toolbar_title);
-        title.setText(getIntent().getStringExtra("name"));
-        setDisplayHomeAsUpEnabled(true);
+        title.setText(categoryName);
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
                 swipeRefreshLayout.setRefreshing(true);
 
+            }
+        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         videoDetailAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -225,10 +233,7 @@ public class VideoDetailActivity extends BaseActivity {
     //按下返回键
     @Override
     public void onBackPressed() {
-        //从全屏返回
-        if (GSYVideoPlayer.backFromWindowFull(this)) {
-            return;
-        }
+
         super.onBackPressed();
     }
 

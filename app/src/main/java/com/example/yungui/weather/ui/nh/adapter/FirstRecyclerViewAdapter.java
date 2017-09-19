@@ -13,11 +13,14 @@ import com.example.yungui.weather.modle.nh.NH_DataBean;
 import java.util.List;
 
 
+/**
+ * 多布局adapter
+ */
 public class FirstRecyclerViewAdapter extends BaseMultiItemQuickAdapter<NH_DataBean.DataBean.ContentListBean, BaseViewHolder> {
 
     public FirstRecyclerViewAdapter(@Nullable List<NH_DataBean.DataBean.ContentListBean> data) {
         super(data);
-        //绑定视图
+        //装载不同类型对应的布局
         addItemType(NH_DataBean.DataBean.ContentListBean.PIC, R.layout.nh_item_pic_text);
         addItemType(NH_DataBean.DataBean.ContentListBean.ONE_WEEK, R.layout.nh_item_text);
         addItemType(NH_DataBean.DataBean.ContentListBean.ESSAY, R.layout.nh_item_text);
@@ -28,7 +31,7 @@ public class FirstRecyclerViewAdapter extends BaseMultiItemQuickAdapter<NH_DataB
 
     @Override
     protected void convert(BaseViewHolder helper, NH_DataBean.DataBean.ContentListBean item) {
-        Log.e(TAG, ">>>>>>>>>>>>convert: " + item.getCategory());
+        //根据布局类型设置内容
         switch (helper.getItemViewType()) {
             case NH_DataBean.DataBean.ContentListBean.PIC:
                 helper.setText(R.id.first_content, item.getForward());
@@ -76,7 +79,6 @@ public class FirstRecyclerViewAdapter extends BaseMultiItemQuickAdapter<NH_DataB
                 helper.setText(R.id.movie_author, "·文|" + item.getAuthor().getUser_name());
                 helper.setText(R.id.movie_title, item.getTitle());
                 helper.setText(R.id.movie_about, "---关于"+"《"+item.getSubtitle()+"》");
-
                 Glide.with(mContext)
                         .load(item.getImg_url())
                         .into((ImageView) helper.getView(R.id.img));

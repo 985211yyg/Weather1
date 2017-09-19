@@ -73,7 +73,7 @@ public class VideoSearchFragment extends DialogFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String key = (String) adapter.getData().get(position);
-                Intent intent = new Intent(getActivity(), VideoDetailActivity.class);
+                Intent intent = new Intent(getActivity(), VideoSearchDetailActivity.class);
                 intent.putExtra("key",key);
                 startActivity(intent);
                 getDialog().dismiss();

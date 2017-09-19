@@ -12,6 +12,7 @@
     <color name="loading_bg_v_color">#ffffff</color>
     <color name="black_overlay">#9b9999</color>
     <color name="white">#ffffff</color>
+    <color name="welcome">#0099cc</color>
 
     <array name="theme_colors">
         <item>@color/colorPrimary</item>

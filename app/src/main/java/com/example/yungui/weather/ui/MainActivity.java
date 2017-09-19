@@ -9,12 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.example.yungui.weather.AppGlobal;
 import com.example.yungui.weather.R;
+import com.example.yungui.weather.event.DayNightEvent;
 import com.example.yungui.weather.event.ThemeChangeEvent;
 import com.example.yungui.weather.ui.base.BaseActivity;
 import com.example.yungui.weather.ui.nh.NHfragment;
@@ -24,7 +24,6 @@ import com.example.yungui.weather.ui.video.VideoFragment;
 import com.example.yungui.weather.ui.weather.WeatherFragment;
 import com.example.yungui.weather.ui.welfare.WelfareFragment;
 import com.example.yungui.weather.ui.wxmm.WXmmFragment;
-import com.example.yungui.weather.utils.SHA1;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -77,14 +76,6 @@ public class MainActivity extends BaseActivity
 
     private void initDrawer() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        linearLayout = (LinearLayout) findViewById(R.id.icon_linearLayout);
-//        linearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void initNavigationView() {
@@ -118,7 +109,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void loadData() {
-        Log.e(TAG, "loadData: "+SHA1.getSHA1(getApplicationContext()));
+//        Log.e(TAG, "loadData: "+SHA1.getSHA1(getApplicationContext()));
     }
 
     /**
@@ -156,11 +147,11 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_movie) {
             switchContent(FRAGMENT_TAG_VIDEO);
 
-        } else if (id == R.id.nav_welfare) {
-            switchContent(FRAGMENT_TAG_WELFARE);
-
-
-        } else if (id == R.id.nav_setting) {
+        }
+//        else if (id == R.id.nav_welfare) {
+//            switchContent(FRAGMENT_TAG_WELFARE);
+//        }
+        else if (id == R.id.nav_setting) {
             this.startActivity(new Intent(MainActivity.this, SettingActivity.class));
         } else if (id == R.id.nav_about) {
 
@@ -213,9 +204,9 @@ public class MainActivity extends BaseActivity
                     FoundFragment = new VideoFragment();
                     break;
 
-                case FRAGMENT_TAG_WELFARE:
-                    FoundFragment = new WelfareFragment();
-                    break;
+//                case FRAGMENT_TAG_WELFARE:
+//                    FoundFragment = new WelfareFragment();
+//                    break;
             }
         }
         //如果fragment已经被添加，则直接展示，
@@ -253,9 +244,26 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    /**
+     * 监听主题的改变
+     *
+     * @param changeEvent
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onThemeChanged(ThemeChangeEvent changeEvent) {
         this.recreate();
+    }
+
+    /**
+     * 监听夜间白天模式的改变
+     *
+     * @param dayNightEvent
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDayNightModeChanged(DayNightEvent dayNightEvent) {
+        // TODO: 2017/9/7
+        String mode = dayNightEvent.getDayAndNight();
+
     }
 
     @Override

@@ -131,27 +131,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (getMenuId() != 0) {
-            //调用getMenuId
-            getMenuInflater().inflate(getMenuId(), menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        onMenuItemClick(id);
-        return super.onOptionsItemSelected(item);
-    }
-
     private void initTheme() {
         int themeIndex = SettingUtil.getTheme();
         switch (themeIndex) {
@@ -191,6 +170,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(getMenuId(),menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onMenuItemClick(item.getItemId());
+        return true;
     }
 
     /**

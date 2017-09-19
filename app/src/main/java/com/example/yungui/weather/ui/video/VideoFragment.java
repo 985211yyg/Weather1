@@ -50,15 +50,7 @@ public class VideoFragment extends BaseFragment {
         return R.layout.fragment_video;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
 
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +77,7 @@ public class VideoFragment extends BaseFragment {
         //设置toolbar与drawer联动
         ((MainActivity) getActivity()).initToolbar(toolbar);
         toolbar.setTitle("开眼");
+
         recyclerView = findView(R.id.video_recycleView);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         videoAdapter = new VideoAdapter(R.layout.fragment_video_item, null);

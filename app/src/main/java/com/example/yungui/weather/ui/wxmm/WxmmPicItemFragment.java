@@ -42,16 +42,6 @@ public class WxmmPicItemFragment extends BaseFragment implements DragPhotoView.O
     }
 
     @Override
-    protected int getMenuID() {
-        return 0;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
-
-    @Override
     protected void initView() {
         frameLayout = findView(R.id.img_background);
         url = getArguments().getString("url");

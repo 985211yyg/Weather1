@@ -2,7 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/more"
-        android:title="more"
+        android:id="@+id/item_tts"
+        android:icon="@drawable/tts"
+        android:title="朗读"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/item_share"
+        android:title="分享"
+        android:icon="@drawable/sahre"
         app:showAsAction="always" />
 </menu>

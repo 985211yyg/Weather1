@@ -34,15 +34,6 @@ public class WelfareFragment extends BaseContentFragment {
         return R.layout.fragment_welfare_viewpager;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     protected void initView() {

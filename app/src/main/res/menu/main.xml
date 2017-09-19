@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_more"
         android:orderInCategory="100"
-        android:title="搜索"
+        android:title="more"
         app:showAsAction="always" />
 </menu>

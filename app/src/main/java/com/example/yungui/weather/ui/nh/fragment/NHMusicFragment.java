@@ -56,15 +56,6 @@ public class NHMusicFragment extends BaseFragment {
         return R.layout.fragment_nhmusic;
     }
 
-    @Override
-    protected int getMenuID() {
-        return 0;
-    }
-
-    @Override
-    protected void onMenuItemClick(int id) {
-
-    }
 
     @Override
     protected void initView() {
