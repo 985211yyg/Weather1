@@ -26,7 +26,7 @@ public class RxLocation {
 
     public static final String TAG = RxLocation.class.getName();
     //私有的静态实例
-    private static RxLocation instance = new RxLocation();
+    private static RxLocation instance;
 
     //私有的构造方法
     private RxLocation() {
@@ -34,13 +34,21 @@ public class RxLocation {
 
     //返回实例
     public static RxLocation getInstance() {
+        if (instance == null) {
+            synchronized (RxLocation.class) {
+                if (instance == null) {
+                    instance = new RxLocation();
+                }
+            }
+        }
         return instance;
     }
 
     public Observable<AMapLocation> locate(final Activity context) {
-        Log.e(TAG, "locate: " );
+        Log.e(TAG, "locate: ");
         return Observable.unsafeCreate(new LocationObservable_OnSubscribe(context));
     }
+
     /**
      * 获取上次定位过的位置
      *

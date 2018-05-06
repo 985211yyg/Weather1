@@ -48,40 +48,32 @@ public class WxmmPicItemFragment extends BaseFragment implements DragPhotoView.O
         dragPhotoView = findView(R.id.img);
         progressBar = findView(R.id.progressBar);
         dragPhotoView.setExitListener(this);
-//        count.setText(position+"/"+totalCount);
-
     }
 
     @Override
     protected void lazyFetchData() {
         progressBar.setVisibility(View.GONE);
         Glide.with(mContext)
-                .load(url).
-                diskCacheStrategy(DiskCacheStrategy.ALL)
+                .load(url)
                 .into(dragPhotoView);
-
-
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        System.gc();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        System.gc();
+
     }
 
     @Override
     public void onExit(DragPhotoView dragPhotoView, float translateX, float translateY, float W, float Y) {
 
-//        float alpha = 255 - Math.abs(translateY) / 2;
-//        if (alpha < 0) {
-//            alpha = 0;
-//        } else if (alpha > 255) {
-//            alpha = 255;
-//        }
-//        //0-255
-//        window = getActivity().getWindow();
-//        WindowManager.LayoutParams layoutParams = window.getAttributes();
-//        layoutParams.alpha = alpha;
-//        window.setAttributes(layoutParams);
         if (translateY> 500) {
             getActivity().finish();
             getActivity().overridePendingTransition(0,R.transition.explode);

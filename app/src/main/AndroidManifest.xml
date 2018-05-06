@@ -85,8 +85,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity
             android:name=".ui.nh.PicShareActivity"
             android:label="@string/title_activity_pic_share"

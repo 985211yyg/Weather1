@@ -156,7 +156,6 @@ public class NHDetailActivity extends BaseActivity implements
         BottomSheetDialogFragment.newInstance(1, R.layout.fragment_item_list_dialog_item,
                 BottomSheetDialogFragment.TEXT).show(getSupportFragmentManager(), "shareImg");
 
-
     }
 
     @Override

@@ -11,7 +11,7 @@ import rx.Observable;
 import rx.Subscriber;
 
 /**
- * 获取上册的定位，并监听其变化
+ * 获取上次的定位，并监听其变化
  * Created by yungui on 2017/6/22.
  */
 

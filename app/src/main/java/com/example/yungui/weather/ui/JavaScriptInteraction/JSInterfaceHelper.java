@@ -18,6 +18,7 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by yungui on 2017/8/7.
+ * js调用java的方法
  */
 
 public class JSInterfaceHelper {
@@ -45,7 +46,6 @@ public class JSInterfaceHelper {
      */
     @android.webkit.JavascriptInterface
     public void showSource(String html) {
-
         //返回HTML数据的回调
         onJSInterface.showSource(html);
     }
@@ -79,7 +79,6 @@ public class JSInterfaceHelper {
     @android.webkit.JavascriptInterface
     public void openImage(String url) {
         onJSInterface.openImage(url);
-
     }
 
     /**
@@ -109,7 +108,9 @@ public class JSInterfaceHelper {
         onJSInterface.getTextContent(content);
     }
 
-
+    /**
+     * 回调接口
+     */
     public interface OnJSInterface {
         void getItemUrl(String url);
 
@@ -161,9 +162,7 @@ public class JSInterfaceHelper {
      */
     public List<String> getAllImageUrlFormSrcObject(List<String> preImageUrls) {
         List<String> imgUrls = new ArrayList<>();
-//        if (isClearPicData) {
         imgUrls.clear();
-//        }
         for (String image : preImageUrls) {
             Matcher matcher = Pattern.compile(IMAGE_URL_CONTENT).matcher(image);
             while (matcher.find()) {
@@ -173,7 +172,6 @@ public class JSInterfaceHelper {
                 imgUrls.add(matcher.group().substring(0, matcher.group().length() - 1));
             }
         }
-//        Log.e(TAG, "getAllImageUrlFormSrcObject: " + imgUrls.size() + imgUrls.toString());
         return imgUrls;
     }
 

@@ -21,9 +21,11 @@ import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.yungui.weather.Listener.AMapLocationListener;
 import com.example.yungui.weather.R;
 import com.example.yungui.weather.http.ApiFactory;
 import com.example.yungui.weather.http.response.BaseWeatherResponse;
+import com.example.yungui.weather.location.MyLocationClient;
 import com.example.yungui.weather.location.RxLocation;
 import com.example.yungui.weather.modle.HeWeather5;
 import com.example.yungui.weather.tts.TTS;
@@ -75,7 +77,7 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
     private TTS tts;
     private StringBuilder stringBuilder;
 
-    public static final String TAG = WeatherFragment.class.getName();
+    public static final String TAG = WeatherFragment.class.getSimpleName();
 
     @Override
 
@@ -147,7 +149,7 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
 
         //分别从缓存和网络中获取数据，
         subscription = Observable
-                .concat(getLocalCache(),getFromNetWork())
+                .concat(getLocalCache(), getFromNetWork())
                 .first()
                 //在主线程中更新
                 .observeOn(AndroidSchedulers.mainThread())
@@ -174,6 +176,7 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
                         }).show();
 
                     }
+
                     @Override
                     public void onNext(HeWeather5 heWeather5) {
                         showWeather(heWeather5);
@@ -184,8 +187,8 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main,menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        inflater.inflate(R.menu.main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -205,7 +208,7 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
                 .flatMap(new Func1<AMapLocation, Observable<BaseWeatherResponse<HeWeather5>>>() {
                     @Override
                     public Observable<BaseWeatherResponse<HeWeather5>> call(AMapLocation aMapLocation) {
-                        Log.e(TAG, "call: "+aMapLocation.getCity());
+                        Log.e(TAG, "call: " + aMapLocation.getCity());
                         String city = TextUtils.isEmpty(aMapLocation.getCity()) ?
                                 "昆明" : aMapLocation.getCity().replace("市", "");
                         return WeatherUtil
@@ -214,7 +217,7 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
                                 .flatMap(new Func1<String, Observable<BaseWeatherResponse<HeWeather5>>>() {
                                     @Override
                                     public Observable<BaseWeatherResponse<HeWeather5>> call(String key) {
-                                        Log.e(TAG, "call: key"+key );
+                                        Log.e(TAG, "call: key" + key);
                                         return ApiFactory
                                                 .getWeatherController()
                                                 .getWeather(key, city)
@@ -250,7 +253,6 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
                             subscriber.onNext(cacheWeather);
                         }
                         subscriber.onCompleted();
-
                     }
                 });
 
@@ -265,10 +267,10 @@ public class WeatherFragment extends BaseFragment implements SwipeRefreshLayout.
         String updateTime = TimeUtils.string2String(heWeather5.getBasic().getUpdate().getLoc(),
                 new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()),
                 new SimpleDateFormat("hh:mm", Locale.getDefault()));
-        time.setText("截至 " + updateTime); 
+        time.setText("截至 " + updateTime);
         stringBuilder.append("截至北京时间:" + updateTime);
         stringBuilder.append(heWeather5.getBasic().getCity());
-        stringBuilder.append("\n天气  "+heWeather5.getNow().getCond().getTxt());
+        stringBuilder.append("\n天气  " + heWeather5.getNow().getCond().getTxt());
         stringBuilder.append("\n温度  " + heWeather5.getNow().getTmp() + "摄氏度");
         stringBuilder.append("\n空气质量  " + heWeather5.getAqi().getCity().getQlty());
 

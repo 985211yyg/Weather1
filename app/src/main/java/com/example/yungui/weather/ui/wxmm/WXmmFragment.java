@@ -54,17 +54,20 @@ import rx.schedulers.Schedulers;
  */
 
 public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJSInterface {
+    public static final String TAG = WXmmFragment.class.getSimpleName();
     private Toolbar toolbar;
     private BannerAdapter bannerAdapter;
     private CircleIndicator circleIndicator;
     private ViewPager viewPager;
-    private Subscription subscription;
+    private Subscription subscription, subscription1;
     private ProgressBar progressBar;
 
     private List<String> bannerUrls = new ArrayList<>();
     private List<String> bannerDecs = new ArrayList<>();
 
     private List<String> imgUrls = new ArrayList<>();
+    private List<String> preImgUrls = new ArrayList<>();
+
 
     private String data;
     private String longClickUrl;
@@ -85,7 +88,7 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
     // 获取 img 标签正则
     private static final String IMAGE_URL_TAG = "<img.*src=(.*?)[^>]*?>";
     // 获取 src 路径的正则
-    private static final String IMAGE_URL_CONTENT = "http:\"?(.*?)(\"|>|\\s+)";
+    private static final String IMAGE_URL_CONTENT = "https:\"?(.*?)(\"|>|\\s+)";
 
 
     @Override
@@ -110,20 +113,19 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
         //开启js交互
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);
-
+        //预加载的webView
         preWebViewSetting = preWebView.getSettings();
         preWebViewSetting.setUseWideViewPort(true);
         preWebViewSetting.setJavaScriptEnabled(true);
-
-        preWebView.addJavascriptInterface(new JSInterfaceHelper(this), "local_obj");
-        preWebView.addJavascriptInterface(new JSInterfaceHelper(this), "imageListener");
+        preWebView.addJavascriptInterface(new JSInterfaceHelper(this), JSInterfaceHelper.HTML_SOURCR);
+//        preWebView.addJavascriptInterface(new JSInterfaceHelper(this), JSInterfaceHelper.IMG_CLICK);
 
         //注入HTML获取去js
-        webView.addJavascriptInterface(new JSInterfaceHelper(this), "local_obj");
+        webView.addJavascriptInterface(new JSInterfaceHelper(this), JSInterfaceHelper.HTML_SOURCR);
         //注入item点击监听js
         webView.addJavascriptInterface(new JSInterfaceHelper(this), "itemListener");
-        //注入图片店家监听js
-        webView.addJavascriptInterface(new JSInterfaceHelper(this), "imageListener");
+        //注入图片点击监听js
+        webView.addJavascriptInterface(new JSInterfaceHelper(this), JSInterfaceHelper.IMG_CLICK);
 
         //回调事件
         webView.setWebViewClient(new WebViewClient() {
@@ -156,9 +158,6 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
             @Override
             public void onLoadResource(WebView view, String url) {
                 super.onLoadResource(view, url);
-//                Log.e(TAG, ">>>>>>>>>>>>>>>>onLoadResource: " + webView.ifRefresh());
-                //注入js代码，获取所有html数据
-//                addJsForHtmlSource(view);
                 JSInject.addItemClickListener(view);
                 JSInject.addImageClickListener(view);
             }
@@ -192,20 +191,18 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(mContext, "长按", Toast.LENGTH_SHORT).show();
                 responseWebLongClick(v);
                 return true;
             }
         });
 
         preWebView.setWebViewClient(new WebViewClient() {
+            //网页加载完成
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 //注入js
-                Log.e(TAG, "onPageFinished: 注入JS！！！");
                 JSInject.addJsForPreHtmlSource(view);
-//                JSInject.addImageClickListener(view);
             }
         });
 
@@ -222,7 +219,6 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
                         try {
                             Document document = Jsoup.connect(url).timeout(1500).get();
                             Elements as = document.select(".swiper").select("a[href]");
-//                            Log.e(TAG, "a: " + as.toString());
                             int i = 0;
                             for (Element a : as) {
                                 String imgUrl = a.select("div").attr("style");
@@ -232,9 +228,7 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
                                 int endIndex = imgUrl.lastIndexOf(")") - 1;
                                 String bannerUrl = imgUrl.substring(startIndex, endIndex);
                                 bannerUrls.add(bannerUrl);
-//                                Log.e(TAG, " "+imgUrl+"startIndex"+startIndex+"endIndex"+endIndex+"bannerUrl:"+bannerUrl);
                             }
-//                            Log.e(TAG, "bannerUrls" + bannerUrls.toString());
                             //去除html banner
                             document.select("#namespace_0").remove();
                             data = document.toString();
@@ -280,7 +274,8 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
             if (result != null) {
                 int type = result.getType();
                 //如果长安的是图片
-                if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                if (type == WebView.HitTestResult.IMAGE_TYPE ||
+                        type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
                     longClickUrl = result.getExtra();
                     //弹出菜单
                     Log.e(TAG, "responseWebLongClick: " + longClickUrl);
@@ -314,21 +309,13 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
 
     }
 
-    /**
-     * 下载图片
-     *
-     * @param url
-     */
-    public void downloadImg(String url) {
-        Toast.makeText(mContext, "保存完成！", Toast.LENGTH_SHORT).show();
 
-    }
-
+    //======================JS注入回调的响应=====================================
     @Override
     public void getItemUrl(String url) {
-        Log.e(TAG, ">>>>>>>getItemIndex: " + url);
+        Log.e(TAG, ">>>>>>>getItemUrl: " + url);
         //可以开始获取万文章详情进行图片
-        Observable.just(url)
+        subscription1 = Observable.just(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -358,14 +345,19 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
 
     @Override
     public void getPreSource(String html) {
+        Log.e(TAG, "getPreSource: " + html);
+        //解析出图片
         getAllImageUrlFromHtml(html);
 
     }
 
+    //在单独的窗口代开图片
     @Override
     public void openImage(String url) {
         //处理URL
-        String newUrl = url.replace("640", "0").substring(0, url.lastIndexOf("jpeg") + 2);
+        String newUrl = url.replace("640", "0")
+                .substring(0, url.lastIndexOf("jpeg") + 2)
+                .replace("http", "https");
         int index = imgUrls.indexOf(newUrl);
         Intent intent = new Intent(mContext, WXmmPicActivity.class);
         intent.putExtra("position", index);
@@ -375,6 +367,7 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
 
     @Override
     public void getAllImages(List<String> imageList) {
+        Log.e(TAG, "getAllImages: " + imageList.size());
 
     }
 
@@ -399,14 +392,13 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
      * @return
      */
     private List<String> getAllImageUrlFromHtml(String html) {
+        preImgUrls.clear();
         Matcher matcher = Pattern.compile(IMAGE_URL_TAG).matcher(html);
-        List<String> preImgUrls = new ArrayList<>();
         while (matcher.find()) {
             preImgUrls.add(matcher.group());
         }
         //解析正确地址
-        getAllImageUrlFormSrcObject(preImgUrls);
-        return preImgUrls;
+        return getAllImageUrlFormSrcObject(preImgUrls);
 
     }
 
@@ -417,16 +409,13 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
      *<img src="http://sc1.hao123img.com/data/f44daab" />
      */
     private List<String> getAllImageUrlFormSrcObject(List<String> listImageUrl) {
-        if (isClearPicData) {
-            imgUrls.clear();
-        }
+        imgUrls.clear();
         for (String image : listImageUrl) {
             Matcher matcher = Pattern.compile(IMAGE_URL_CONTENT).matcher(image);
             while (matcher.find()) {
                 imgUrls.add(matcher.group().substring(0, matcher.group().length() - 1));
             }
         }
-        Log.e(TAG, "getAllImageUrlFormSrcObject: " + imgUrls.size() + imgUrls.toString());
         return imgUrls;
     }
 
@@ -441,17 +430,23 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
     @Override
     public void onDestroy() {
         super.onDestroy();
+        //解绑被观察者
+        if (subscription1 != null && subscription1.isUnsubscribed()) {
+            subscription1.unsubscribe();
+            subscription1 = null;
+
+        }
         if (subscription != null || !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
             subscription = null;
         }
-        //解绑被观察者
-        if (subscription != null && subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
         if (webView != null) {
             webView.loadUrl(null);
             webView = null;
+        }
+        if (preWebView != null) {
+            preWebView.loadUrl(null);
+            preWebView = null;
         }
 
     }
@@ -460,6 +455,7 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
     public void onPause() {
         super.onPause();
         webView.onPause();
+        preWebView.onPause();
     }
 
     @Override
@@ -471,5 +467,15 @@ public class WXmmFragment extends BaseFragment implements JSInterfaceHelper.OnJS
     public void onResume() {
         super.onResume();
         webView.onResume();
+        preWebView.onResume();
+    }
+
+    /**
+     * 下载图片
+     *
+     * @param url
+     */
+    public void downloadImg(String url) {
+        Toast.makeText(mContext, "保存完成！", Toast.LENGTH_SHORT).show();
     }
 }

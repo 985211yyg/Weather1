@@ -5,7 +5,6 @@ package com.example.yungui.weather.http.response;
  */
 
 public class BaseAppResponse<T> {
-
     public boolean error;
     public T results;
 }

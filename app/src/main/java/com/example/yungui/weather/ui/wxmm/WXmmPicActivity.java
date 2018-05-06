@@ -37,7 +37,7 @@ public class WXmmPicActivity extends BasePicActivity {
     protected void initView(Bundle savedInstanceState) {
         position = getIntent().getIntExtra("position", 0);
         imgUrls = getIntent().getStringArrayListExtra("imgs");
-        Log.e("imgUrls", "接受的图片: "+imgUrls);
+        Log.e("imgUrls", "接受的图片: " + imgUrls);
 
         save = (Button) findViewById(R.id.mm_save);
         count = (TextView) findViewById(R.id.mm_count);
@@ -54,7 +54,7 @@ public class WXmmPicActivity extends BasePicActivity {
 
             @Override
             public void onPageSelected(int position) {
-                count.setText(position+1+"/"+imgUrls.size());
+                count.setText(position + 1 + "/" + imgUrls.size());
             }
 
             @Override
@@ -85,4 +85,9 @@ public class WXmmPicActivity extends BasePicActivity {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+    }
 }

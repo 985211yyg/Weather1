@@ -159,6 +159,15 @@ public class NHfragment extends BaseFragment implements
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null && subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+            subscription = null;
+        }
+    }
+
+    @Override
     public void onItemClicked(int position) {
 
     }

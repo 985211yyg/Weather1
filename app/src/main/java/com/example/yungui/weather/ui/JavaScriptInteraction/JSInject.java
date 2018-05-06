@@ -4,12 +4,12 @@ import android.webkit.WebView;
 
 /**
  * Created by yungui on 2017/8/7.
+ * 向JS中注入调用java的代码
  */
 
 public class JSInject {
     /**
-     * 注入 js 函数监听 获取预加载数据
-     *
+     * 注入 js获取网页主内容
      * @param view
      */
     public static void addJsForPreHtmlSource(WebView view) {
@@ -19,7 +19,8 @@ public class JSInject {
     }
 
     /**
-     * 注入JS，凶获得的页面中获取已加载页面所有图片地址
+     * 注入JS，获得的页面中获取已加载页面所有图片地址
+     *
      * @param view
      */
     public static void addJsForAllImages(WebView view) {
@@ -59,7 +60,7 @@ public class JSInject {
                 "var objs = document.getElementsByTagName(\"img\"); " +
                 "for(var i=0;i<objs.length;i++)  " +
                 "{"
-                +     "objs[i].onclick=function()  " +
+                + "objs[i].onclick=function()  " +
                 "    {  "
                 + "        window.imageListener.openImage(this.src);  " +
                 "    }  " +
@@ -69,26 +70,9 @@ public class JSInject {
 
     /**
      * 注入js 添加item的点击事件，获取点击的index
+     * 此段代码的功能是点击网页item是返回该item的url
      */
     public static void addItemClickListener(WebView view) {
-        view.loadUrl("javascript:(function(){" +
-                "var objs = document.getElementsByClassName(\"list_item\");" +
-//                "window.itemListener.showToast();"+
-//                "var objs = document.getElementsByTagName(\"a\"); " +
-                "for(var i=0;i<objs.length;i++)  " +
-                "{"
-                + "    objs[i].onclick=function()  " +
-                "    {  "
-                + "       window.itemListener.getItemUrl(this.href);  " +
-
-                "    }  " +
-                "}" +
-                "})()");
-    }
-    /**
-     * 注入js 添加item的点击事件，获取点击的index
-     */
-    public static void addItemClickListener(WebView view,String itemName) {
         view.loadUrl("javascript:(function(){" +
                 "var objs = document.getElementsByClassName(\"list_item\");" +
 //                "window.itemListener.showToast();"+
